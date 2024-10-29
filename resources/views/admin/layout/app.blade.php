@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    @include('user.partials.head')
+    @include('admin.partials.head')
     @yield('styles')
 
     <body data-menu-color="dark" data-sidebar="default">
@@ -10,11 +10,11 @@
         <div id="app-layout">
 
             <!-- Topbar Start -->
-            @include('user.partials.header')
+            @include('admin.partials.header')
             <!-- end Topbar -->
 
             <!-- Left Sidebar Start -->
-            @include('user.partials.left-sidebar')
+            @include('admin.partials.left-sidebar')
             <!-- Left Sidebar End -->
 
             <!-- ============================================================== -->
@@ -30,7 +30,7 @@
                 </div> <!-- content -->
 
                 <!-- Footer Start -->
-                @include('user.partials.footer')
+                @include('admin.partials.footer')
                 <!-- end Footer -->
                 
             </div>
@@ -40,7 +40,7 @@
 
         </div>
         <!-- END wrapper -->
-        @include('user.partials.scripts')
+        @include('admin.partials.scripts')
         @yield('scripts')
 
     </body>

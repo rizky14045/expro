@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('user.dashboard');
+    return redirect()->route('login');
 });
 Route::get('/login', function () {
     return view('user.login');
-});
+})->name('login');
+
 Route::get('/register', function () {
     return view('user.register');
 });
 
 require_once('user/web.php');
+require_once('admin/web.php');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,15 +8,15 @@ use App\Http\Controllers\Controller;
 class ListWorkController extends Controller
 {
     public function index(){
-        return view('user.list-work.index');
+        return view('admin.list-work.index');
     }
 
     public function create(){
-        return view('user.list-work.create');
+        return view('admin.list-work.create');
     }
 
     public function edit(){
-        return view('user.list-work.edit');
+        return view('admin.list-work.edit');
     }
 
 }

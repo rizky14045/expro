@@ -26,7 +26,7 @@
                     <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
 
                         <!-- item-->
-                        <a href="#" class="dropdown-item notify-item">
+                        <a href="pages-profile.html" class="dropdown-item notify-item">
                             <i class="mdi mdi-lock-outline fs-16 align-middle"></i>
                             <span>Change Password</span>
                         </a>
@@ -34,7 +34,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="#" class="dropdown-item notify-item">
+                        <a href="auth-logout.html" class="dropdown-item notify-item">
                             <i class="mdi mdi-location-exit fs-16 align-middle"></i>
                             <span>Logout</span>
                         </a>

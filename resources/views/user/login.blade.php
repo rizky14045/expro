@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Login CSMS - PLN Nusantara Power</title>
+        <title>Login Expro - User</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
@@ -37,16 +37,15 @@
                         <div class="row">
                             <div class="col-md-7 mx-auto">
                                 <div class="mb-0 border-0 p-md-5 p-lg-0 p-4">
-                                    <div class="mb-4 p-0">
-                                        <a href="index.html" class="auth-logo">
-                                            <img src="{{asset('logo.png')}}" alt="logo-dark" class="mx-auto" height="28" />
-                                        </a>
+                                    <div class="mb-4 p-0 text-center">
+                                        {{-- <img src="{{asset('logo.png')}}" alt="logo-dark" class="mx-auto" height="50" /> --}}
+                                        <h6 class="mt-2">Sign in to Expro</h6>
                                     </div>
     
                                     <div class="pt-0">
                                         <form action="index.html" class="my-4">
                                             <div class="form-group mb-3">
-                                                <label for="emailaddress" class="form-label">Email address</label>
+                                                <label for="emailaddress" class="form-label">Email</label>
                                                 <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
                                             </div>
                 
@@ -62,9 +61,9 @@
                                                         <label class="form-check-label" for="checkbox-signin">Remember me</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 text-end">
+                                                {{-- <div class="col-sm-6 text-end">
                                                     <a class='text-muted fs-14' href='auth-recoverpw.html'>Forgot password?</a>                             
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             
                                             <div class="form-group mb-0 row">
@@ -76,10 +75,9 @@
                                             </div>
                                         </form>
     
-                                        <div class="saprator my-4"><span>or sign in with</span></div>
     
-                                        <div class="text-center text-muted mb-4">
-                                            <p class="mb-0">Don't have an account ?<a class='text-primary ms-2 fw-medium' href='auth-register.html'>Sing up</a></p>
+                                        <div class="text-center text-primary mb-4">
+                                            <a href="{{route('user.faq.index')}}" class="btn btn-success btn-sm"><span class="mdi mdi-help"></span> Faq</a>
                                         </div>
                                     </div>
                                 </div>

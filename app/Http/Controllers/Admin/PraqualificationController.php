@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,14 +8,14 @@ use App\Http\Controllers\Controller;
 class PraqualificationController extends Controller
 {
     public function index(){
-        return view('user.praqualification.index');
+        return view('admin.praqualification.index');
     }
 
     public function create(){
-        return view('user.praqualification.create');
+        return view('admin.praqualification.create');
     }
 
     public function edit(){
-        return view('user.praqualification.edit');
+        return view('admin.praqualification.edit');
     }
 }
