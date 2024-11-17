@@ -11,19 +11,22 @@
 
 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
     <div class="flex-grow-1">
-        <h4 class="fs-18 fw-semibold m-0">Prakualifikasi</h4>
+        <h4 class="fs-18 fw-semibold m-0">Lisensi</h4>
     </div>
 
     <div class="text-end">
         <ol class="breadcrumb m-0 py-0">
             <li class="breadcrumb-item"><a href="{{route('admin.home.index')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Prakualifikasi</li>
+            <li class="breadcrumb-item active">Lisensi</li>
         </ol>
     </div>
 </div>
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
+            <div class="d-flex justify-content-end pe-3 pt-3">
+                <a href="{{route('admin.license.create')}}" class="btn btn-success">Tambah Data</a>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mb-0">
@@ -36,7 +39,7 @@
                                 <th scope="col">Nama Direktur</th>
                                 <th scope="col">Telp</th>
                                 <th scope="col">Unit</th>
-                                <th scope="col">Tanggal Submit Dokumentasi Prakualifikasi</th>
+                                <th scope="col">Tanggal Submit Dokumentasi License</th>
                                 <th scope="col">Dokumen</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
@@ -50,12 +53,13 @@
                                 <td>812605434432000</td>
                                 <td>Rezza Prawiratama</td>
                                 <td></td>
-                                <td>PT PLN NP UP MUARA KARANG</td>
+                                <td>Expro Mandiri</td>
                                 <td>30-12-2022</td>
                                 <td><a href="#" class="btn btn-link">Download</a></td>
                                 <td>LOLOS CSMS</td>
                                 <td>
-                                    <a href="#" class="btn btn-success btn-sm">Setujui</a>
+                                    <a href="{{route('admin.license.edit')}}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
                                 </td>
                             </tr>
                         </tbody>

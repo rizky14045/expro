@@ -31,12 +31,24 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('user.praqualification.index')}}" class="tp-link">
-                        <i data-feather="check-circle"></i>
-                        <span> Prakualifikasi </span>
+                    <a href="{{route('user.license.index')}}" class="tp-link">
+                        <i data-feather="credit-card"></i>
+                        <span> Lisensi </span>
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('user.inspection.index')}}" class="tp-link">
+                        <i data-feather="users"></i>
+                        <span> Inspeksi </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('user.training.index')}}" class="tp-link">
+                        <i data-feather="user"></i>
+                        <span> Pelatihan K3 </span>
+                    </a>
+                </li>
+                {{-- <li>
                     <a href="{{route('user.profile.index')}}" class="tp-link">
                         <i data-feather="user"></i>
                         <span> Profile </span>
@@ -69,7 +81,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- End Sidebar -->
