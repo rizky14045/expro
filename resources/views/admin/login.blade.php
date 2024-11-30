@@ -42,15 +42,21 @@
                                             {!! \Session::get('danger') !!}
                                         </div>
                                     @endif
-                                    <form action="#" method="POST">
+                                    <form action="{{route('admin.getLogin')}}" method="POST">
                                         @csrf
                                         <div class="form-group pb-3">
                                             <label class="form-label" for="email-id">Email address</label>
-                                            <input type="email" class="form-control mb-0" id="email-id" placeholder="Enter email" name="email">
+                                            <input type="email" class="form-control mb-0" id="email-id" placeholder="Masukan email" name="email">
+                                            @if($errors->has('email'))
+                                                <div class="error text-danger">{{ $errors->first('email') }}</div>
+                                            @endif
                                         </div>
                                         <div class="form-group pb-3">
                                             <label class="form-label" for="password">Password</label>
-                                            <input type="password" class="form-control mb-0" id="password" placeholder="Enter password" name="password">
+                                            <input type="password" class="form-control mb-0" id="password" placeholder="Masukan password" name="password">
+                                            @if($errors->has('password'))
+                                                <div class="error text-danger">{{ $errors->first('password') }}</div>
+                                            @endif
                                         </div>
                                         <div class="text-center pb-3">
                                             <button type="submit" class="btn btn-info">Login</button>
@@ -78,6 +84,7 @@
 
         <!-- App js-->
         <script src="{{asset('assets/js/app.js')}}"></script>
+        @include('sweetalert::alert')
         
     </body>
 </html>

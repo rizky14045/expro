@@ -48,44 +48,8 @@
                         <span> Pelatihan K3 </span>
                     </a>
                 </li>
-                {{-- <li>
-                    <a href="{{route('admin.praqualification.index')}}" class="tp-link">
-                        <i data-feather="check-circle"></i>
-                        <span> Prakualifikasi </span>
-                    </a>
-                </li>
+               
                 <li>
-                    <a href="#sidebarPemasok" data-bs-toggle="collapse">
-                        <i data-feather="briefcase"></i>
-                        <span> Pemasok </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarPemasok">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{route('admin.evaluation.index')}}" class="tp-link">Penilaian</a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.supplier.index')}}" class="tp-link">Daftar Pemasok</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarSeleksi" data-bs-toggle="collapse">
-                        <i data-feather="clipboard"></i>
-                        <span> Seleksi </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarSeleksi">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{route('admin.list-work.index')}}" class="tp-link">Daftar Pekerjaan</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> --}}
-                {{-- <li>
                     <a href="#sidebarMasterData" data-bs-toggle="collapse">
                         <i data-feather="database"></i>
                         <span> Master Data </span>
@@ -94,11 +58,14 @@
                     <div class="collapse" id="sidebarMasterData">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('admin.faq.index')}}" class="tp-link">Faq</a>
+                                <a href="{{route('admin.admin.index')}}" class="tp-link">Admin</a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.user.index')}}" class="tp-link">User</a>
                             </li>
                         </ul>
                     </div>
-                </li> --}}
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->
