@@ -22,13 +22,13 @@
         <!-- Begin page -->
         <div class="account-page">
             <div class="container-fluid p-0">
-                <div style="background: url({{asset('bg.jpg')}}); background-size: cover;background-repeat: no-repeat;">
+                <div style="background-color: #6b6c6e ; background-size: cover;background-repeat: no-repeat;">
                     <div class="row d-flex align-items-center justify-content-center vh-100 w-100">
                         <div class="col-md-4 col-xl-4 shadow-sm">
                             <div class="card p-4">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="{{asset('logo.png')}}" alt="logo-dark" class="mx-auto pb-1" height="50" />
+                                        <img src="{{asset('123.png')}}" alt="logo-dark" class="mx-auto pb-1" height="50" />
                                         <h5 class="">Sign In</h5>
                                     </div>
                                     @if (\Session::has('success'))

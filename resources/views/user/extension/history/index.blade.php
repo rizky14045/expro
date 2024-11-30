@@ -11,22 +11,19 @@
 
 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
     <div class="flex-grow-1">
-        <h4 class="fs-18 fw-semibold m-0">Lisensi</h4>
+        <h4 class="fs-18 fw-semibold m-0">History</h4>
     </div>
 
     <div class="text-end">
         <ol class="breadcrumb m-0 py-0">
             <li class="breadcrumb-item"><a href="{{route('user.home.index')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Lisensi</li>
+            <li class="breadcrumb-item active">History</li>
         </ol>
     </div>
 </div>
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="d-flex justify-content-end pe-3 pt-3">
-                <a href="{{route('user.license.create')}}" class="btn btn-success">Tambah Data</a>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mb-0">
@@ -58,8 +55,7 @@
                                 <td class="text-nowrap"><a href="#" class="btn btn-link">Download</a></td>
                                 <td class="text-nowrap">LOLOS CSMS</td>
                                 <td class="text-nowrap">
-                                    <a href="{{route('user.license.edit')}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                                    <a href="{{route('user.license.edit')}}" class="btn btn-success btn-sm">Detail</a>
                                 </td>
                             </tr>
                         </tbody>

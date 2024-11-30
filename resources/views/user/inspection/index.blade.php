@@ -32,33 +32,33 @@
                     <table class="table table-bordered table-striped mb-0">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Kode Supplier</th>
-                                <th scope="col">Nama Perusahaan</th>
-                                <th scope="col">NPWP</th>
-                                <th scope="col">Nama Direktur</th>
-                                <th scope="col">Telp</th>
-                                <th scope="col">Unit</th>
-                                <th scope="col">Tanggal Submit Dokumentasi inspection</th>
-                                <th scope="col">Dokumen</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" class="text-nowrap">No</th>
+                                <th scope="col" class="text-nowrap">Kode Supplier</th>
+                                <th scope="col" class="text-nowrap">Nama Perusahaan</th>
+                                <th scope="col" class="text-nowrap">NPWP</th>
+                                <th scope="col" class="text-nowrap">Nama Direktur</th>
+                                <th scope="col" class="text-nowrap">Telp</th>
+                                <th scope="col" class="text-nowrap">Unit</th>
+                                <th scope="col" class="text-nowrap">Tanggal Submit Dokumentasi License</th>
+                                <th scope="col" class="text-nowrap">Dokumen</th>
+                                <th scope="col" class="text-nowrap">Status</th>
+                                <th scope="col" class="text-nowrap">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>V03166</td>
-                                <td>DITAMA NASTARI GEMILANG. CV</td>
-                                <td>812605434432000</td>
-                                <td>Rezza Prawiratama</td>
-                                <td></td>
-                                <td>Expro Mandiri</td>
-                                <td>30-12-2022</td>
-                                <td><a href="#" class="btn btn-link">Download</a></td>
-                                <td>LOLOS CSMS</td>
-                                <td>
-                                    <a href="{{route('user.inspection.edit')}}" class="btn btn-primary btn-sm">Edit</a>
+                                <td class="text-nowrap">1</td>
+                                <td class="text-nowrap">V03166</td>
+                                <td class="text-nowrap">DITAMA NASTARI GEMILANG. CV</td>
+                                <td class="text-nowrap">812605434432000</td>
+                                <td class="text-nowrap">Rezza Prawiratama</td>
+                                <td class="text-nowrap"></td>
+                                <td class="text-nowrap">Expro Mandiri</td>
+                                <td class="text-nowrap">30-12-2022</td>
+                                <td class="text-nowrap"><a href="#" class="btn btn-link">Download</a></td>
+                                <td class="text-nowrap">LOLOS CSMS</td>
+                                <td class="text-nowrap">
+                                    <a href="{{route('user.license.edit')}}" class="btn btn-primary btn-sm">Edit</a>
                                     <a href="#" class="btn btn-danger btn-sm">Hapus</a>
                                 </td>
                             </tr>
