@@ -4,6 +4,9 @@
     .accordion-button::after {
         filter: invert(100%);
     }
+    .table th, .table td {
+        white-space: nowrap; /* Menghindari teks tumpang tindih */
+    }
 </style>
 @stop
 @section('content')
@@ -29,7 +32,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped mb-3" id="users-table">
+                    <table class="table table-bordered table-striped mb-3 w-100" id="users-table">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-nowrap">No</th>

@@ -15,6 +15,8 @@ class CreateInspectionsTable extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->nullable();
+            $table->string('key')->nullable();
             $table->string('number_inspection')->nullable();
             $table->string('object_name')->nullable();
             $table->string('object_location')->nullable();
@@ -23,6 +25,7 @@ class CreateInspectionsTable extends Migration
             $table->string('inspection_file')->nullable();
             $table->string('status')->nullable();
             $table->integer('status_level')->nullable();
+            $table->string('qrcode')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

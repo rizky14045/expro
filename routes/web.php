@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('user.register');
 });
+
+Route::get('/scanner/{uuid}', [HomeController::class, 'scanner'])->name('scanner');
 
 require_once('user/web.php');
 require_once('admin/web.php');

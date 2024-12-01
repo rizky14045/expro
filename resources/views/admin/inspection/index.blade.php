@@ -4,7 +4,11 @@
     .accordion-button::after {
         filter: invert(100%);
     }
+    .table th, .table td {
+        white-space: nowrap; /* Menghindari teks tumpang tindih */
+    }
 </style>
+
 @stop
 @section('content')
     
@@ -29,39 +33,24 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped mb-0">
+                    <table class="table table-bordered table-striped mb-0 w-100" id="inspections-table">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Kode Supplier</th>
-                                <th scope="col">Nama Perusahaan</th>
-                                <th scope="col">NPWP</th>
-                                <th scope="col">Nama Direktur</th>
-                                <th scope="col">Telp</th>
-                                <th scope="col">Unit</th>
-                                <th scope="col">Tanggal Submit Dokumentasi inspection</th>
-                                <th scope="col">Dokumen</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" class="text-nowrap">No</th>
+                                <th scope="col" class="text-nowrap">Nomor Form</th>
+                                <th scope="col" class="text-nowrap">Nama Perusahaan</th>
+                                <th scope="col" class="text-nowrap">Objek yang diuji</th>
+                                <th scope="col" class="text-nowrap">Lokasi objek yang diuji</th>
+                                <th scope="col" class="text-nowrap">Tanggal Inspeksi</th>
+                                <th scope="col" class="text-nowrap">Dokumen</th>
+                                <th scope="col" class="text-nowrap">Status</th>
+                                <th scope="col" class="text-nowrap">Qrcode</th>
+                                <th scope="col" class="text-nowrap">Print Qrcode</th>
+                                <th scope="col" class="text-nowrap">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>V03166</td>
-                                <td>DITAMA NASTARI GEMILANG. CV</td>
-                                <td>812605434432000</td>
-                                <td>Rezza Prawiratama</td>
-                                <td></td>
-                                <td>Expro Mandiri</td>
-                                <td>30-12-2022</td>
-                                <td><a href="#" class="btn btn-link">Download</a></td>
-                                <td>LOLOS CSMS</td>
-                                <td>
-                                    <a href="{{route('admin.inspection.edit')}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-                                </td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>
@@ -70,5 +59,48 @@
         </div><!-- end card -->
     </div><!-- end col -->
 </div> <!-- end row -->
+@endsection
+@section('scripts')
+<script>
+    function deleteItem(e){
+              // console.log(form);
+              Swal.fire({
+                  title: 'Hapus Data',
+                  text: "Apakah kamu ingin menghapus data ?",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Iya !'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      $(e).parent().submit();
+                  }
+              })
+          }
+  
+  </script>
+  <script>
+    $(document).ready(function () {
+        $('#inspections-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.inspection.index') }}", // Route untuk AJAX
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'number_inspection', name: 'number_inspection' },
+                { data: 'user_name', name: 'user.name' }, // Relasi user
+                { data: 'object_name', name: 'object_name' },
+                { data: 'object_location', name: 'object_location' },
+                { data: 'inspection_date', name: 'inspection_date' },
+                { data: 'inspection_file', name: 'inspection_file', orderable: false, searchable: false },
+                { data: 'status', name: 'status' },
+                { data: 'qrcode', name: 'qrcode', orderable: false, searchable: false },
+                { data: 'print', name: 'print', searchable: false },
+                { data: 'action', name: 'action', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
 @endsection
 

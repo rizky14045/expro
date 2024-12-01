@@ -37,7 +37,12 @@ Route::prefix('admin')->group(function () {
         Route::prefix('inspection')->group(function () {
             Route::get('/', [InspectionController::class, 'index'])->name('admin.inspection.index');
             Route::get('/create', [InspectionController::class, 'create'])->name('admin.inspection.create');
-            Route::get('/edit', [InspectionController::class, 'edit'])->name('admin.inspection.edit');
+            Route::post('/store', [InspectionController::class, 'store'])->name('admin.inspection.store');
+            Route::get('/edit/{id}', [InspectionController::class, 'edit'])->name('admin.inspection.edit');
+            Route::patch('/update/{id}', [InspectionController::class, 'update'])->name('admin.inspection.update');
+            Route::get('/status-update/{id}', [InspectionController::class, 'statusUpdate'])->name('admin.inspection.statusUpdate');
+            Route::patch('/status-update/{id}', [InspectionController::class, 'changeStatus'])->name('admin.inspection.changeStatus');
+            Route::delete('/destroy/{id}', [InspectionController::class, 'destroy'])->name('admin.inspection.destroy');
         });
         Route::prefix('training')->group(function () {
             Route::get('/', [TrainingController::class, 'index'])->name('admin.training.index');
