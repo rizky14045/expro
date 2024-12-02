@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('logo.ico')}}">
+        <link rel="shortcut icon" href="{{asset('fav.ico')}}">
     
         <!-- App css -->
         <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
@@ -28,7 +28,7 @@
                             <div class="card p-4">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="{{asset('123.png')}}" alt="logo-dark" class="mx-auto pb-1" height="50" />
+                                        <img src="{{asset('logo.png')}}" alt="logo-dark" class="mx-auto pb-1" height="50" />
                                         <h5 class="">Sign In</h5>
                                     </div>
                                     @if (\Session::has('success'))

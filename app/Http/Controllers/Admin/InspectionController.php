@@ -188,7 +188,9 @@ class InspectionController extends Controller
             {      
                 $file= $request->file('inspection_file');
                 $image_name = 'file-inspection-' . time() .'.'. $file->getClientOriginalExtension();
-                unlink(public_path('uploads/inspection_file/'.$inspection->inspection_file));
+                if($inspection->inspection_file){
+                    unlink(public_path('uploads/inspection_file/'.$inspection->inspection_file));
+                }
                 $file->move(public_path('uploads/inspection_file/'),$image_name);   
                 $inspectionFile = $image_name;
             }

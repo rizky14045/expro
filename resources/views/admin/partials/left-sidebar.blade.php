@@ -7,18 +7,18 @@
             <div class="logo-box">
                 <a href="{{route('admin.home.index')}}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{asset('123.png')}}" alt="" height="22">
+                        <img src="{{asset('logo.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('123.png')}}" alt="" height="45">
+                        <img src="{{asset('logo.png')}}" alt="" height="45">
                     </span>
                 </a>
                 <a href="{{route('admin.home.index')}}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('123.png')}}" alt="" height="22">
+                        <img src="{{asset('logo.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('123.png')}}" alt="" height="45">
+                        <img src="{{asset('logo.png')}}" alt="" height="45">
                     </span>
                 </a>
             </div>

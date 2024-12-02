@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('logo.ico')}}">
+        <link rel="shortcut icon" href="{{asset('fav.ico')}}">
     
         <!-- App css -->
         <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
@@ -33,7 +33,7 @@
                             <div class="col-md-7 mx-auto">
                                 <div class="mb-0 border-0 p-md-5 p-lg-0 p-4">
                                     <div class="mb-4 p-0 text-center">
-                                        <img src="{{asset('123.png')}}" alt="logo-dark" class="mx-auto" height="50" />
+                                        <img src="{{asset('logo.png')}}" alt="logo-dark" class="mx-auto" height="50" />
                                         <h6 class="mt-2">Log in to Expro</h6>
                                     </div>
     
