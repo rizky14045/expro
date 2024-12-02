@@ -40,7 +40,7 @@ class InspectionController extends Controller
                             </a>';
                 })
                 ->addColumn('print', function ($row) {
-                    return ' <button type="button" class="btn btn-info btn-sm btn-print-qrcode">Print</button>
+                    return ' <button type="button" class="btn btn-info btn-sm btn-print-qrcode" onclick="printQRCode(this)">Print</button>
                                         <div class="d-none"><iframe src="about:blank" class="iframe-qrcode"></iframe></div>';
                 })
                 ->addColumn('action', function ($row) {

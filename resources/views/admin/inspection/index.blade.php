@@ -61,6 +61,17 @@
 </div> <!-- end row -->
 @endsection
 @section('scripts')
+<script type="text/javascript">
+    $('.btn-print-qrcode').click(function() {
+        alert('ok');
+        // var img = $(this).closest('tr').find('img.qrcode')[0];
+        // var iframe = $(this).closest('tr').find('.iframe-qrcode')[0];
+        // var doc = iframe.contentWindow.document
+        // doc.open();
+        // doc.write('<html><body><img style="height:4cm;width:auto;" src="'+$(img).attr('src')+'"/><script>window.onload = print<\/script><\/body></html>')
+        // doc.close();
+    });
+</script>
 <script>
     function deleteItem(e){
               // console.log(form);

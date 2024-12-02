@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InspectionController;
+use App\Http\Controllers\Admin\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('admin.getLogin')->middleware('guest-admin');
     
     Route::middleware(['auth-admin'])->group(function () { 
+        Route::get('/change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.changePassword');
+        Route::patch('/update-password', [ChangePasswordController::class, 'updatePassword'])->name('admin.updatePassword');
         Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.home.index');
         Route::prefix('license')->group(function () {

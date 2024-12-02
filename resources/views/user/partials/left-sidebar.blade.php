@@ -30,12 +30,12 @@
                         <span> Home </span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{route('user.profile.index')}}" class="tp-link">
                         <i data-feather="user"></i>
                         <span> Profile </span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{route('user.license.index')}}" class="tp-link">
                         <i data-feather="credit-card"></i>

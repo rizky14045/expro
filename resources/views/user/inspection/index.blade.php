@@ -4,7 +4,11 @@
     .accordion-button::after {
         filter: invert(100%);
     }
+    .table th, .table td {
+        white-space: nowrap; /* Menghindari teks tumpang tindih */
+    }
 </style>
+
 @stop
 @section('content')
     
@@ -24,44 +28,25 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="d-flex justify-content-end pe-3 pt-3">
-                <a href="{{route('user.inspection.create')}}" class="btn btn-success">Tambah Data</a>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped mb-0">
+                    <table class="table table-bordered table-striped mb-0 w-100" id="inspections-table-user">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-nowrap">No</th>
-                                <th scope="col" class="text-nowrap">Kode Supplier</th>
+                                <th scope="col" class="text-nowrap">Nomor Form</th>
                                 <th scope="col" class="text-nowrap">Nama Perusahaan</th>
-                                <th scope="col" class="text-nowrap">NPWP</th>
-                                <th scope="col" class="text-nowrap">Nama Direktur</th>
-                                <th scope="col" class="text-nowrap">Telp</th>
-                                <th scope="col" class="text-nowrap">Unit</th>
-                                <th scope="col" class="text-nowrap">Tanggal Submit Dokumentasi License</th>
+                                <th scope="col" class="text-nowrap">Objek yang diuji</th>
+                                <th scope="col" class="text-nowrap">Lokasi objek yang diuji</th>
+                                <th scope="col" class="text-nowrap">Tanggal Inspeksi</th>
                                 <th scope="col" class="text-nowrap">Dokumen</th>
                                 <th scope="col" class="text-nowrap">Status</th>
-                                <th scope="col" class="text-nowrap">Action</th>
+                                <th scope="col" class="text-nowrap">Qrcode</th>
+                                <th scope="col" class="text-nowrap">Print Qrcode</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-nowrap">1</td>
-                                <td class="text-nowrap">V03166</td>
-                                <td class="text-nowrap">DITAMA NASTARI GEMILANG. CV</td>
-                                <td class="text-nowrap">812605434432000</td>
-                                <td class="text-nowrap">Rezza Prawiratama</td>
-                                <td class="text-nowrap"></td>
-                                <td class="text-nowrap">Expro Mandiri</td>
-                                <td class="text-nowrap">30-12-2022</td>
-                                <td class="text-nowrap"><a href="#" class="btn btn-link">Download</a></td>
-                                <td class="text-nowrap">LOLOS CSMS</td>
-                                <td class="text-nowrap">
-                                    <a href="{{route('user.license.edit')}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-                                </td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>
@@ -70,5 +55,28 @@
         </div><!-- end card -->
     </div><!-- end col -->
 </div> <!-- end row -->
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $('#inspections-table-user').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('user.inspection.index') }}", // Route untuk AJAX
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'number_inspection', name: 'number_inspection' },
+                { data: 'user_name', name: 'user.name' }, // Relasi user
+                { data: 'object_name', name: 'object_name' },
+                { data: 'object_location', name: 'object_location' },
+                { data: 'inspection_date', name: 'inspection_date' },
+                { data: 'inspection_file', name: 'inspection_file', orderable: false, searchable: false },
+                { data: 'status', name: 'status' },
+                { data: 'qrcode', name: 'qrcode', orderable: false, searchable: false },
+                { data: 'print', name: 'print', searchable: false },
+            ]
+        });
+    });
+</script>
 @endsection
 

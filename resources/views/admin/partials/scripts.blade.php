@@ -66,13 +66,20 @@
 <script type="text/javascript" src="{{asset('assets/swal/sweetalert2.all.min.js')}}"></script>
 <script src="{{asset('assets/datatables/jquery.dataTables.min.js')}}"></script> <!-- DataTables -->
 <script type="text/javascript">
-    $('.btn-print-qrcode').click(function(e) {
-        e.preventDefault();
-        var img = $(this).closest('tr').find('img.qrcode')[0];
-        var iframe = $(this).closest('tr').find('.iframe-qrcode')[0];
-        var doc = iframe.contentWindow.document
+    function printQRCode(button) {
+        var img = $(button).closest('tr').find('img.qrcode')[0];
+        if (!img) {
+            console.error("Gambar QR Code tidak ditemukan!");
+            return;
+        }
+        var iframe = $(button).closest('tr').find('.iframe-qrcode')[0];
+        if (!iframe) {
+            console.error("Iframe tidak ditemukan!");
+            return;
+        }
+        var doc = iframe.contentWindow.document;
         doc.open();
-        doc.write('<html><body><img style="height:4cm;width:auto;" src="'+$(img).attr('src')+'"/><script>window.onload = print<\/script><\/body></html>')
+        doc.write('<html><body><img style="height:4cm;width:auto;" src="' + $(img).attr('src') + '"/><script>window.onload = print<\/script><\/body></html>');
         doc.close();
-    });
+    }
 </script>
