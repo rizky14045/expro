@@ -25,7 +25,19 @@
                     </div>
                 </div>
             </div> 
-        </div>
+            <div class="col-md-6 col-xl-6">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="fs-14 mb-1">Jumlah License</div>
+                        </div>
+                        <div class="d-flex align-items-baseline mb-2">
+                            <div class="fs-22 mb-0 me-2 fw-semibold">{{number_format($inspection)}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
     </div> <!-- end sales -->
     <hr>
     <h5>Data Inspeksi</h5>

@@ -99,7 +99,7 @@
                         </div>
                         <div class="form-group mb-3 col-md-6">
                             <label for="objectPlace" class="form-label">Catatan</label>
-                            <input class="form-control" type="text" placeholder="Masukan catatan" name="note">
+                            <input class="form-control" type="text" placeholder="Masukan catatan" name="note" value="{{old('note')}}">
                         </div>  
                         <div class="form-group row">
                             <div class="col-md-6">

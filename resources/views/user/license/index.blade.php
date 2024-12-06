@@ -24,44 +24,21 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="d-flex justify-content-end pe-3 pt-3">
-                <a href="{{route('user.license.create')}}" class="btn btn-success">Tambah Data</a>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped mb-0">
+                    <table class="table table-bordered table-striped mb-0" id="licenses-table">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-nowrap">No</th>
-                                <th scope="col" class="text-nowrap">Kode Supplier</th>
-                                <th scope="col" class="text-nowrap">Nama Perusahaan</th>
-                                <th scope="col" class="text-nowrap">NPWP</th>
-                                <th scope="col" class="text-nowrap">Nama Direktur</th>
-                                <th scope="col" class="text-nowrap">Telp</th>
-                                <th scope="col" class="text-nowrap">Unit</th>
-                                <th scope="col" class="text-nowrap">Tanggal Submit Dokumentasi License</th>
-                                <th scope="col" class="text-nowrap">Dokumen</th>
-                                <th scope="col" class="text-nowrap">Status</th>
-                                <th scope="col" class="text-nowrap">Action</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Nomor License</th>
+                                <th scope="col">Nama Perusahaan</th>
+                                <th scope="col">Nama Lisensi</th>
+                                <th scope="col">Tanggal Expired</th>
+                                <th scope="col">Dokumen</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-nowrap">1</td>
-                                <td class="text-nowrap">V03166</td>
-                                <td class="text-nowrap">DITAMA NASTARI GEMILANG. CV</td>
-                                <td class="text-nowrap">812605434432000</td>
-                                <td class="text-nowrap">Rezza Prawiratama</td>
-                                <td class="text-nowrap"></td>
-                                <td class="text-nowrap">Expro Mandiri</td>
-                                <td class="text-nowrap">30-12-2022</td>
-                                <td class="text-nowrap"><a href="#" class="btn btn-link">Download</a></td>
-                                <td class="text-nowrap">LOLOS CSMS</td>
-                                <td class="text-nowrap">
-                                    <a href="{{route('user.license.edit')}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-                                </td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>
@@ -70,5 +47,24 @@
         </div><!-- end card -->
     </div><!-- end col -->
 </div> <!-- end row -->
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#licenses-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('user.license.index') }}", // Route ke controller
+                columns: [
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                    { data: 'number_license', name: 'number_license' },
+                    { data: 'user_name', name: 'user.name' },
+                    { data: 'license_name', name: 'license_name' },
+                    { data: 'expired_date', name: 'expired_date' },
+                    { data: 'license_file', name: 'license_file', orderable: false, searchable: false },
+                ]
+            });
+        });
+    </script>
 @endsection
 

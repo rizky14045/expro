@@ -32,10 +32,17 @@ Route::prefix('admin')->group(function () {
         Route::patch('/update-password', [ChangePasswordController::class, 'updatePassword'])->name('admin.updatePassword');
         Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.home.index');
+
         Route::prefix('license')->group(function () {
             Route::get('/', [LicenseController::class, 'index'])->name('admin.license.index');
             Route::get('/create', [LicenseController::class, 'create'])->name('admin.license.create');
-            Route::get('/edit', [LicenseController::class, 'edit'])->name('admin.license.edit');
+            Route::post('/store', [LicenseController::class, 'store'])->name('admin.license.store');
+            Route::get('/edit/{id}', [LicenseController::class, 'edit'])->name('admin.license.edit');
+            Route::patch('/update/{id}', [LicenseController::class, 'update'])->name('admin.license.update');
+            Route::delete('/destroy/{id}', [LicenseController::class, 'destroy'])->name('admin.license.destroy');
+            Route::get('/renew/{id}', [LicenseController::class, 'renew'])->name('admin.license.renew');
+            Route::patch('/renew/{id}', [LicenseController::class, 'renewUpdate'])->name('admin.license.renewUpdate');
+            Route::post('/email/{id}', [LicenseController::class, 'email'])->name('admin.license.email');
         });
         Route::prefix('inspection')->group(function () {
             Route::get('/', [InspectionController::class, 'index'])->name('admin.inspection.index');
