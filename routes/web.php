@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/scanner/{uuid}', [HomeController::class, 'scanner'])->name('scanner');
+Route::get('/tester', [HomeController::class, 'tester'])->name('tester');
 Route::get('/login', [AuthController::class, 'getLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('getLogin')->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

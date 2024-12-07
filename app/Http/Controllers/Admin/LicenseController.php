@@ -32,7 +32,12 @@ class LicenseController extends Controller
                     return $tanggalSekarang->diffInDays($tanggal);
                 })
                 ->addColumn('license_file', function ($row) {
-                    return '<a href="' . asset('uploads/license_file/' . $row->license_file) . '" class="btn btn-success btn-sm" download>Download</a>';
+                    if ($row->license_file) {
+                        return '<a href="' . asset('uploads/license_file/' . $row->license_file) . '" class="btn btn-success btn-sm" download>Download</a>';
+                    }else{
+                        return '';
+                    }
+                    
                 })
                 ->addColumn('action', function ($row) {
                     $buttons = '

@@ -1,34 +1,47 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\License;
 use App\Mail\RenewEmail;
-use App\Models\Inspection;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
-class HomeController extends Controller
+class BlastCommand extends Command
 {
-    public function scanner($uuid){
-        if(Auth::guard('admin')->check() || Auth::guard('web')->check()){
-            $inspection = Inspection::where('uuid', $uuid)->first();
-            if (!$inspection){
-                abort(404);
-            }
-            $data['inspection'] = $inspection;
-            return view('scanner',$data);
-        }else{
-            abort(403);
-        }
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'email:blast';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Blast email setiap jam 9 pagi';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
     }
 
-    public function tester(){
-
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
         $tanggalSekarang = Carbon::now();
         $tanggalMendekati = $tanggalSekarang->copy()->addDays(31);
         $tanggalTerlewat = $tanggalSekarang->copy()->subDays(365);
@@ -46,6 +59,5 @@ class HomeController extends Controller
             Mail::to($user->email)->queue(new RenewEmail($license,$user));
         }
 
-        return 'ok';
     }
 }

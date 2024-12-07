@@ -32,7 +32,7 @@
                             <div class="fs-14 mb-1">Jumlah License</div>
                         </div>
                         <div class="d-flex align-items-baseline mb-2">
-                            <div class="fs-22 mb-0 me-2 fw-semibold">{{number_format($inspection)}}</div>
+                            <div class="fs-22 mb-0 me-2 fw-semibold">{{number_format($license)}}</div>
                         </div>
                     </div>
                 </div>
