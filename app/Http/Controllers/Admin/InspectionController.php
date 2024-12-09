@@ -16,7 +16,7 @@ class InspectionController extends Controller
 {
     public function index(Request $request){
         if ($request->ajax()) {
-            $query = Inspection::with('user')->select('inspections.*'); // Mengambil data inspeksi dan relasi user
+            $query = Inspection::with('user')->select('inspections.*')->latest(); // Mengambil data inspeksi dan relasi user
     
             return datatables()->of($query)
                 ->addIndexColumn() // Menambahkan kolom nomor urut

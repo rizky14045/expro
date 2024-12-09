@@ -18,7 +18,7 @@ class LicenseController extends Controller
 {
     public function index(Request $request){
         if ($request->ajax()) {
-            $query = License::with('user')->select('licenses.*');
+            $query = License::with('user')->select('licenses.*')->latest();
         
             return datatables()->of($query)
                 ->addIndexColumn() // Tambahkan nomor urut

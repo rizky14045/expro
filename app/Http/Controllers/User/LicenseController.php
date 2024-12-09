@@ -17,8 +17,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class LicenseController extends Controller
 {
     public function index(Request $request){
+        
+        $userId = Auth::guard('web')->user()->id;
         if ($request->ajax()) {
-            $query = License::with('user')->select('licenses.*');
+            $query = License::with('user')->select('licenses.*')->where('user_id', $userId)->latest();
         
             return datatables()->of($query)
                 ->addIndexColumn() // Tambahkan nomor urut

@@ -14,7 +14,7 @@ class InspectionController extends Controller
         $userId = Auth::guard('web')->user()->id;
 
         if ($request->ajax()) {
-            $query = Inspection::select('inspections.*') ->where('user_id', $userId); // Mengambil data inspeksi dan relasi user
+            $query = Inspection::select('inspections.*')->where('user_id', $userId)->latest(); // Mengambil data inspeksi dan relasi user
     
             return datatables()->of($query)
                 ->addIndexColumn() // Menambahkan kolom nomor urut
