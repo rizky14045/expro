@@ -56,6 +56,41 @@
                             @endif  
                         </div>
                         <div class="form-group mb-3 col-md-6">
+                            <label for="objectName" class="form-label">Jenis Personil</label>
+                            <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan jenis personil" name="personil_type" value="{{old('personil_type')}}">
+                            @if($errors->has('personil_type'))
+                                <div class="error text-danger">{{ $errors->first('personil_type') }}</div>
+                            @endif  
+                        </div>
+                        <div class="form-group mb-3 col-md-6">
+                            <label for="objectName" class="form-label">Bidang Jasa</label>
+                            <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan bidang jasa" name="service_sector" value="{{old('service_sector')}}">
+                            @if($errors->has('service_sector'))
+                                <div class="error text-danger">{{ $errors->first('service_sector') }}</div>
+                            @endif  
+                        </div>
+                        <div class="form-group mb-3 col-md-6">
+                            <label for="objectName" class="form-label">Jenis Alat</label>
+                            <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan jenis alat" name="tool_type" value="{{old('tool_type')}}">
+                            @if($errors->has('tool_type'))
+                                <div class="error text-danger">{{ $errors->first('tool_type') }}</div>
+                            @endif  
+                        </div>
+                        <div class="form-group mb-3 col-md-6">
+                            <label for="objectName" class="form-label">Klasifikasi</label>
+                            <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan klasifikasi" name="clasification" value="{{old('clasification')}}">
+                            @if($errors->has('clasification'))
+                                <div class="error text-danger">{{ $errors->first('clasification') }}</div>
+                            @endif  
+                        </div>
+                        <div class="form-group mb-3 col-md-6">
+                            <label for="objectName" class="form-label">Kelas</label>
+                            <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan kelas" name="class" value="{{old('class')}}">
+                            @if($errors->has('class'))
+                                <div class="error text-danger">{{ $errors->first('class') }}</div>
+                            @endif  
+                        </div>
+                        <div class="form-group mb-3 col-md-6">
                             <label for="inputPDF" class="form-label">Tanggal Expired</label>
                             <input type="date" class="form-control" name="expired_date" value="{{old('expired_date')}}">
                             @if($errors->has('expired_date'))

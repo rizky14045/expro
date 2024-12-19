@@ -4,6 +4,9 @@
     .accordion-button::after {
         filter: invert(100%);
     }
+    .table th, .table td {
+        white-space: nowrap; /* Menghindari teks tumpang tindih */
+    }
 </style>
 @stop
 @section('content')
@@ -26,13 +29,18 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped mb-0" id="licenses-table">
+                    <table class="table table-bordered table-striped mb-0 w-100" id="licenses-table">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nomor License</th>
                                 <th scope="col">Nama Perusahaan</th>
                                 <th scope="col">Nama Lisensi</th>
+                                <th scope="col">Jenis Personil</th>
+                                <th scope="col">Bidang Jasa</th>
+                                <th scope="col">Jenis Alat</th>
+                                <th scope="col">Klasifikasi</th>
+                                <th scope="col">Kelas</th>
                                 <th scope="col">Tanggal Expired</th>
                                 <th scope="col">Dokumen</th>
                             </tr>
@@ -60,6 +68,11 @@
                     { data: 'number_license', name: 'number_license' },
                     { data: 'user_name', name: 'user.name' },
                     { data: 'license_name', name: 'license_name' },
+                    { data: 'personel_type', name: 'personel_type' },
+                    { data: 'service_sector', name: 'service_sector' },
+                    { data: 'tool_type', name: 'tool_type' },
+                    { data: 'clasification', name: 'clasification' },
+                    { data: 'class', name: 'class' },
                     { data: 'expired_date', name: 'expired_date' },
                     { data: 'license_file', name: 'license_file', orderable: false, searchable: false },
                 ]

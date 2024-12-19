@@ -87,14 +87,23 @@ class LicenseController extends Controller
                 'number_license' => 'required',
                 'user_id' => 'required',
                 'license_name' => 'required',
+                'personel_type' => 'required',
+                'service_sector' => 'required',
+                'tool_type' => 'required',
+                'clasification' => 'required',
+                'class' => 'required',
                 'expired_date' => 'required',
                 'license_file' => 'mimes:pdf',
             ],[
                 'number_license.required' => 'Nomor lisensi harus diisi!',
                 'user_id.required' => 'User harus diisi!',
                 'license_name.required' => 'Nama lisensi harus diisi!',
+                'personel_type.required' => 'Jenis Personil harus diisi!',
+                'service_sector.required' => 'Bidang Jasa harus diisi!',
+                'tool_type.required' => 'Jenis Alat harus diisi!',
+                'clasification.required' => 'Klasifikasi harus diisi!',
+                'class.required' => 'Kelas harus diisi!',
                 'expired_date.required' => 'Tanggal expired harus diisi!',
-                // 'license_file.required' => 'File harus diisi!',
                 'license_file.mimes' => 'File harus berupa PDF!',
        
             ]);
@@ -121,6 +130,12 @@ class LicenseController extends Controller
                 'number_license' => $request->number_license,
                 'user_id' => $request->user_id,
                 'license_name' => $request->license_name,
+                'expired_date' => $request->expired_date,
+                'personel_type' => $request->personel_type,
+                'service_sector' => $request->service_sector,
+                'tool_type' => $request->tool_type,
+                'clasification' => $request->clasification,
+                'class' => $request->class,
                 'expired_date' => $request->expired_date,
                 'license_file' => $licenseFile,
                 'note' => $request->note ?? null,
@@ -151,14 +166,23 @@ class LicenseController extends Controller
                 'number_license' => 'required',
                 'user_id' => 'required',
                 'license_name' => 'required',
+                'personel_type' => 'required',
+                'service_sector' => 'required',
+                'tool_type' => 'required',
+                'clasification' => 'required',
+                'class' => 'required',
                 'expired_date' => 'required',
                 'license_file' => 'mimes:pdf',
             ],[
                 'number_license.required' => 'Nomor lisensi harus diisi!',
                 'user_id.required' => 'User harus diisi!',
                 'license_name.required' => 'Nama lisensi harus diisi!',
+                'personel_type.required' => 'Jenis Personil harus diisi!',
+                'service_sector.required' => 'Bidang Jasa harus diisi!',
+                'tool_type.required' => 'Jenis Alat harus diisi!',
+                'clasification.required' => 'Klasifikasi harus diisi!',
+                'class.required' => 'Kelas harus diisi!',
                 'expired_date.required' => 'Tanggal expired harus diisi!',
-                // 'license_file.required' => 'File harus diisi!',
                 'license_file.mimes' => 'File harus berupa PDF!',
        
             ]);
@@ -181,6 +205,12 @@ class LicenseController extends Controller
             $license->number_license = $request->number_license;
             $license->user_id = $request->user_id;
             $license->license_name = $request->license_name;
+            $license->expired_date = $request->expired_date;
+            $license->personel_type = $request->personel_type;
+            $license->service_sector = $request->service_sector;
+            $license->tool_type = $request->tool_type;
+            $license->clasification = $request->clasification;
+            $license->class = $request->class;
             $license->expired_date = $request->expired_date;
             $license->license_file = $request->has('license_file') ? $licenseFile : $license->license_file;
             $license->note = $request->note;
