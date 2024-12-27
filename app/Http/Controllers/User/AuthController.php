@@ -42,7 +42,7 @@ class AuthController extends Controller
         }else{
             
             Alert::error('Login gagal','Email atau password salah!!');
-            return redirect()->route('user.login');
+            return redirect()->route('login');
 
         }
     }
