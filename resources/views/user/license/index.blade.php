@@ -34,6 +34,7 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nomor License</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Nama Perusahaan</th>
                                 <th scope="col">Nama Lisensi</th>
                                 <th scope="col">Jenis Personil</th>
@@ -66,6 +67,7 @@
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'number_license', name: 'number_license' },
+                    { data: 'status', name: 'status' },
                     { data: 'user_name', name: 'user.name' },
                     { data: 'license_name', name: 'license_name' },
                     { data: 'personel_type', name: 'personel_type' },

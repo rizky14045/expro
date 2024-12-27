@@ -20,6 +20,10 @@ class DashboardController extends Controller
         $data['inspection_process'] = Inspection::where('user_id',$userId)->where('status_level',2)->count();
         $data['inspection_revision'] = Inspection::where('user_id',$userId)->where('status_level',3)->count();
         $data['inspection_reject'] = Inspection::where('user_id',$userId)->where('status_level',4)->count();
+        $data['license_accept'] = License::where('user_id',$userId)->where('status_level',1)->count();
+        $data['license_process'] = License::where('user_id',$userId)->where('status_level',2)->count();
+        $data['license_revision'] = License::where('user_id',$userId)->where('status_level',3)->count();
+        $data['license_reject'] = License::where('user_id',$userId)->where('status_level',4)->count();
         return view('user.dashboard',$data);
     }
 }

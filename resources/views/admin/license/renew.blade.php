@@ -48,13 +48,54 @@
                             <input class="form-control" type="text" id="objectName" disabled placeholder="Masukan nama lisensi" value="{{$license->license_name}}"> 
                         </div>
                         <hr>
-                        <div class="row col-md-6">
+                        <h5>Ubah Status Lisensi</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3 user-select">
+                                    <label for="example-select" class="form-label">Status Sebelumnya</label>
+                                    <select class="form-select" id="example-select" disabled>
+                                        <option value="">Pilih Status</option>
+                                        <option value="1" {{ $license->status_level == 1 ? 'selected' : '' }}>Diproses</option>
+                                        <option value="2" {{ $license->status_level == 2 ? 'selected' : '' }}>Disetujui</option>
+                                        <option value="3" {{ $license->status_level == 3 ? 'selected' : '' }}>Revisi</option>
+                                        <option value="4" {{ $license->status_level == 4 ? 'selected' : '' }}>Ditolak</option>
+                                    </select>
+                                </div> 
+                                <div class="form-group mb-3">
+                                    <label for="objectPlace" class="form-label">Keterangan Status</label>
+                                    <input class="form-control" type="text" id="objectPlace" required="" placeholder="Masukan keterangan status" value="{{$license->status}}" disabled>
+                                </div>  
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 user-select">
+                                    <label for="example-select" class="form-label">Status</label>
+                                    <select class="form-select" id="example-select" name="status_level" required>
+                                        <option value="">Pilih Status</option>
+                                        <option value="1" {{ old('status_level') == 1 ? 'selected' : '' }}>Diproses</option>
+                                        <option value="2" {{ old('status_level') == 2 ? 'selected' : '' }}>Disetujui</option>
+                                        <option value="3" {{ old('status_level') == 3 ? 'selected' : '' }}>Revisi</option>
+                                        <option value="4" {{ old('status_level') == 4 ? 'selected' : '' }}>Ditolak</option>
+                                    </select>
+                                    @if($errors->has('status_level'))
+                                        <div class="error text-danger">{{ $errors->first('status_level') }}</div>
+                                    @endif
+                                </div> 
+                                <div class="form-group mb-3">
+                                    <label for="objectPlace" class="form-label">Keterangan Status</label>
+                                    <input class="form-control" type="text" id="objectPlace" required="" placeholder="Masukan keterangan status" name="status" value="{{ old('status')}}">
+                                    @if($errors->has('status'))
+                                        <div class="error text-danger">{{ $errors->first('status') }}</div>
+                                    @endif
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="form-group mb-3 col-md-6">
                                 <label for="inputPDF" class="form-label">Tanggal Expired</label>
                                 <input type="date" class="form-control" value="{{$license->expired_date}}" disabled>
                             </div>
                             <div class="form-group mb-3 col-md-6">
-                                <label for="inputPDF" class="form-label">Tanggal Baru</label>
+                                <label for="inputPDF" class="form-label">Tanggal Baru ( Opsional )</label>
                                 <input type="date" class="form-control" name="new_date">
                             </div>
                         </div>

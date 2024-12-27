@@ -28,6 +28,14 @@ class LicenseController extends Controller
                 ->addColumn('user_name', function ($row) {
                     return $row->user->name ?? '-';
                 })
+                ->addColumn('status', function ($row) {
+                    switch ($row->status_level) {
+                        case 1: return 'Diproses';
+                        case 2: return 'Disetujui';
+                        case 3: return 'Revisi';
+                        case 4: return 'Ditolak';
+                    }
+                })
                 ->addColumn('license_file', function ($row) {
                     return '<a href="' . asset('uploads/license_file/' . $row->license_file) . '" class="btn btn-success btn-sm" download>Download</a>';
                 })

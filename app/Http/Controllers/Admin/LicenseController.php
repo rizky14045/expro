@@ -9,6 +9,7 @@ use App\Models\License;
 use App\Mail\RenewEmail;
 use App\Models\RenewLicense;
 use Illuminate\Http\Request;
+use App\Models\LicenseDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -30,6 +31,14 @@ class LicenseController extends Controller
                     $tanggal = Carbon::parse($row->expired_date);
                     $tanggalSekarang = Carbon::now();
                     return $tanggalSekarang->diffInDays($tanggal);
+                })
+                ->addColumn('status', function ($row) {
+                    switch ($row->status_level) {
+                        case 1: return 'Diproses';
+                        case 2: return 'Disetujui';
+                        case 3: return 'Revisi';
+                        case 4: return 'Ditolak';
+                    }
                 })
                 ->addColumn('license_file', function ($row) {
                     if ($row->license_file) {
@@ -93,6 +102,8 @@ class LicenseController extends Controller
                 'clasification' => 'required',
                 'class' => 'required',
                 'expired_date' => 'required',
+                'status' => 'required',
+                'status_level' => 'required',
                 'license_file' => 'mimes:pdf',
             ],[
                 'number_license.required' => 'Nomor lisensi harus diisi!',
@@ -103,6 +114,8 @@ class LicenseController extends Controller
                 'tool_type.required' => 'Jenis Alat harus diisi!',
                 'clasification.required' => 'Klasifikasi harus diisi!',
                 'class.required' => 'Kelas harus diisi!',
+                'status.required' => 'Status harus diisi!',
+                'status_level.required' => 'Keterangan status harus diisi!',
                 'expired_date.required' => 'Tanggal expired harus diisi!',
                 'license_file.mimes' => 'File harus berupa PDF!',
        
@@ -137,6 +150,8 @@ class LicenseController extends Controller
                 'clasification' => $request->clasification,
                 'class' => $request->class,
                 'expired_date' => $request->expired_date,
+                'status' => $request->status,
+                'status_level' => $request->status_level,
                 'license_file' => $licenseFile,
                 'note' => $request->note ?? null,
             ]);
@@ -172,6 +187,8 @@ class LicenseController extends Controller
                 'clasification' => 'required',
                 'class' => 'required',
                 'expired_date' => 'required',
+                'status' => 'required',
+                'status_level' => 'required',
                 'license_file' => 'mimes:pdf',
             ],[
                 'number_license.required' => 'Nomor lisensi harus diisi!',
@@ -182,6 +199,8 @@ class LicenseController extends Controller
                 'tool_type.required' => 'Jenis Alat harus diisi!',
                 'clasification.required' => 'Klasifikasi harus diisi!',
                 'class.required' => 'Kelas harus diisi!',
+                'status.required' => 'Status harus diisi!',
+                'status_level.required' => 'Keterangan status harus diisi!',
                 'expired_date.required' => 'Tanggal expired harus diisi!',
                 'license_file.mimes' => 'File harus berupa PDF!',
        
@@ -212,6 +231,8 @@ class LicenseController extends Controller
             $license->clasification = $request->clasification;
             $license->class = $request->class;
             $license->expired_date = $request->expired_date;
+            $license->status = $request->status;
+            $license->status_level = $request->status_level;
             $license->license_file = $request->has('license_file') ? $licenseFile : $license->license_file;
             $license->note = $request->note;
             $license->save();
@@ -263,17 +284,34 @@ class LicenseController extends Controller
         try {
             DB::beginTransaction();
 
+            $request->validate([
+                'status' => 'required',
+                'status_level' => 'required',
+            ],[
+                'status.required' => 'Status harus diisi!',
+                'status_level.required' => 'Keterangan status harus diisi!',
+       
+            ]);
             $license = License::where('id',$id)->first();
-            $license->expired_date = $request->new_date;
+            $license->expired_date = $request->new_date ?? $license->expired_date;
             $license->save();
 
-            RenewLicense::create([
+            if($request->has('new_date')){
+                RenewLicense::create([
+                    'license_id' => $license->id,
+                    'user_id' => $license->user_id,
+                    'expired_date' => $request->new_date
+                ]);
+            }
+
+            LicenseDetail::create([
                 'license_id' => $license->id,
-                'user_id' => $license->user_id,
-                'expired_date' => $request->new_date
+                'status' => $request->status,
+                'status_level' => $request->status_level,
             ]);
+            
             DB::commit();
-            Alert::success('Update Berhasil', 'Lisensi berhasil diperpanjang!');
+            Alert::success('Update Berhasil', 'Lisensi berhasil diupdate!');
             return redirect()->route('admin.license.index');
 
         } catch (\Throwable $th) {
