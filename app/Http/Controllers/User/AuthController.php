@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         if(!$user){
             Alert::error('Login gagal','Email atau password salah!!');
-            return redirect()->route('user.login');
+            return redirect()->route('login');
         }
 
         if( Hash::check($request->password,$user->password) ){
