@@ -60,7 +60,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <img src="{{asset('logo.png')}}" alt="Bank Mega Logo">
+            <img src="{{asset('logo.png')}}" alt="Logo Image">
             <h2>Lisensi akan kedaluwarsa</h2>
         </div>
         <div class="paragraf" align="justify">
