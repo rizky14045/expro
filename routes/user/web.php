@@ -38,11 +38,11 @@ Route::prefix('user')->group(function () {
             Route::get('/create', [InspectionController::class, 'create'])->name('user.inspection.create');
             Route::get('/edit', [InspectionController::class, 'edit'])->name('user.inspection.edit');
         });
-        Route::prefix('training')->group(function () {
-            Route::get('/', [TrainingController::class, 'index'])->name('user.training.index');
-            Route::get('/create', [TrainingController::class, 'create'])->name('user.training.create');
-            Route::get('/edit', [TrainingController::class, 'edit'])->name('user.training.edit');
-        });
+        // Route::prefix('training')->group(function () {
+        //     Route::get('/', [TrainingController::class, 'index'])->name('user.training.index');
+        //     Route::get('/create', [TrainingController::class, 'create'])->name('user.training.create');
+        //     Route::get('/edit', [TrainingController::class, 'edit'])->name('user.training.edit');
+        // });
     
         Route::prefix('profile')->group(function () {
             Route::get('/', [ProfileController::class, 'index'])->name('user.profile.index');

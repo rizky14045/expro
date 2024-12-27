@@ -48,12 +48,12 @@
                         <span> Inspeksi </span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{route('user.training.index')}}" class="tp-link">
                         <i data-feather="user"></i>
                         <span> Pelatihan K3 </span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- End Sidebar -->

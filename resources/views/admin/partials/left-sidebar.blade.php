@@ -42,13 +42,13 @@
                         <span> Inspeksi </span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{route('admin.training.index')}}" class="tp-link">
                         <i data-feather="user"></i>
                         <span> Pelatihan K3 </span>
                     </a>
                 </li>
-               
+                --}}
                 <li>
                     <a href="#sidebarMasterData" data-bs-toggle="collapse">
                         <i data-feather="database"></i>

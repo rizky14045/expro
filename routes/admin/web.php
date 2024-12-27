@@ -54,11 +54,11 @@ Route::prefix('admin')->group(function () {
             Route::patch('/status-update/{id}', [InspectionController::class, 'changeStatus'])->name('admin.inspection.changeStatus');
             Route::delete('/destroy/{id}', [InspectionController::class, 'destroy'])->name('admin.inspection.destroy');
         });
-        Route::prefix('training')->group(function () {
-            Route::get('/', [TrainingController::class, 'index'])->name('admin.training.index');
-            Route::get('/create', [TrainingController::class, 'create'])->name('admin.training.create');
-            Route::get('/edit', [TrainingController::class, 'edit'])->name('admin.training.edit');
-        });
+        // Route::prefix('training')->group(function () {
+        //     Route::get('/', [TrainingController::class, 'index'])->name('admin.training.index');
+        //     Route::get('/create', [TrainingController::class, 'create'])->name('admin.training.create');
+        //     Route::get('/edit', [TrainingController::class, 'edit'])->name('admin.training.edit');
+        // });
 
         Route::prefix('admin')->group(function () {
             Route::get('/', [AdminController::class, 'index'])->name('admin.admin.index');
