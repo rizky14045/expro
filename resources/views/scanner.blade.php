@@ -3,12 +3,12 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Visitor Management - Bank Mega</title>
+        <title>Expro Jaya Mandiri</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('ico.ico')}}">
+        <link rel="shortcut icon" href="{{asset('fav.ico')}}">
     
         <!-- App css -->
         <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
@@ -71,7 +71,7 @@
                                     <div class="text-center pb-3">
                                         <img src="{{asset('logo.png')}}" alt="logo-dark" class="mx-auto" height="50" />
                                     </div>
-                                    <h5 class="text-center">Detail Visitor</h5>
+                                    <h5 class="text-center">Detail Inspeksi</h5>
                                     <div class="d-flex justify-content-center align-item-center">
                                         <!--Content table-->
                                         <table class="w-50-mobile w-50">
@@ -153,5 +153,6 @@
         <!-- App js-->
         <script src="{{asset('assets/js/app.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/swal/sweetalert2.all.min.js')}}"></script>
+        @include('sweetalert::alert')
     </body>
 </html>

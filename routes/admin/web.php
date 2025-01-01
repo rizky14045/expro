@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/renew/{id}', [LicenseController::class, 'renew'])->name('admin.license.renew');
             Route::patch('/renew/{id}', [LicenseController::class, 'renewUpdate'])->name('admin.license.renewUpdate');
             Route::post('/email/{id}', [LicenseController::class, 'email'])->name('admin.license.email');
+            Route::get('/monitoring/{id}', [LicenseController::class, 'monitoring'])->name('admin.license.monitoring');
         });
         Route::prefix('inspection')->group(function () {
             Route::get('/', [InspectionController::class, 'index'])->name('admin.inspection.index');
@@ -53,6 +54,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/status-update/{id}', [InspectionController::class, 'statusUpdate'])->name('admin.inspection.statusUpdate');
             Route::patch('/status-update/{id}', [InspectionController::class, 'changeStatus'])->name('admin.inspection.changeStatus');
             Route::delete('/destroy/{id}', [InspectionController::class, 'destroy'])->name('admin.inspection.destroy');
+            Route::get('/monitoring/{id}', [InspectionController::class, 'monitoring'])->name('admin.inspection.monitoring');
         });
         // Route::prefix('training')->group(function () {
         //     Route::get('/', [TrainingController::class, 'index'])->name('admin.training.index');

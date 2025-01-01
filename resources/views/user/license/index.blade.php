@@ -36,7 +36,8 @@
                                 <th scope="col">Nomor License</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Nama Perusahaan</th>
-                                <th scope="col">Nama Lisensi</th>
+                                <th scope="col">Nama Personel</th>
+                                <th scope="col">Tanggal Lahir</th>
                                 <th scope="col">Jenis Personil</th>
                                 <th scope="col">Bidang Jasa</th>
                                 <th scope="col">Jenis Alat</th>
@@ -44,6 +45,7 @@
                                 <th scope="col">Kelas</th>
                                 <th scope="col">Tanggal Expired</th>
                                 <th scope="col">Dokumen</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,6 +72,7 @@
                     { data: 'status', name: 'status' },
                     { data: 'user_name', name: 'user.name' },
                     { data: 'license_name', name: 'license_name' },
+                    { data: 'birthdate', name: 'birthdate' },
                     { data: 'personel_type', name: 'personel_type' },
                     { data: 'service_sector', name: 'service_sector' },
                     { data: 'tool_type', name: 'tool_type' },
@@ -77,6 +80,7 @@
                     { data: 'class', name: 'class' },
                     { data: 'expired_date', name: 'expired_date' },
                     { data: 'license_file', name: 'license_file', orderable: false, searchable: false },
+                    { data: 'action', name: 'action', searchable: false },
                 ]
             });
         });

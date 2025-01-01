@@ -70,6 +70,13 @@
                                 <div class="error text-danger">{{ $errors->first('inspection_date') }}</div>
                             @endif
                         </div>
+                        <div class="form-group mb-3 col-md-6">
+                            <label for="inputPDF" class="form-label">Tanggal Tes Berikutnya</label>
+                            <input type="date" class="form-control" name="next_test_date" value="{{$inspection->next_test_date}}">
+                            @if($errors->has('next_test_date'))
+                                <div class="error text-danger">{{ $errors->first('next_test_date') }}</div>
+                            @endif
+                        </div>
                         <div class="mb-3 col-md-6 user-select">
                             <label for="example-select" class="form-label">Status</label>
                             <select class="form-select" id="example-select" name="status_level">

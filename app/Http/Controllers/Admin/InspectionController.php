@@ -6,10 +6,13 @@ use App\Models\User;
 use Ramsey\Uuid\Uuid;
 use App\Models\Inspection;
 use Illuminate\Http\Request;
+use App\Mail\UpdateLicenseEmail;
 use App\Models\InspectionDetail;
 use App\Http\Helper\QrCodeHelper;
 use Illuminate\Support\Facades\DB;
+use App\Mail\UpdateInspectionEmail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class InspectionController extends Controller
@@ -45,12 +48,13 @@ class InspectionController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '
+                        <a href="' . route('admin.inspection.monitoring', $row->id) . '" class="btn btn-info btn-sm">Monitoring</a>
                         <a href="' . route('admin.inspection.edit', $row->id) . '" class="btn btn-primary btn-sm">Edit</a>
                         <a href="' . route('admin.inspection.changeStatus', $row->id) . '" class="btn btn-warning btn-sm">Update Status</a>
                         <form action="' . route('admin.inspection.destroy', $row->id) . '" method="POST" class="d-inline delete-form">
-                            ' . csrf_field() . '
-                            ' . method_field('DELETE') . '
-                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteItem(this)">Hapus</button>
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteItem(this)">Hapus</button>
                         </form>
                     ';
                 })
@@ -71,12 +75,14 @@ class InspectionController extends Controller
         try {
 
             DB::beginTransaction();
+
             $request->validate([
                 'number_inspection' => 'required',
                 'user_id' => 'required',
                 'object_name' => 'required',
                 'object_location' => 'required',
                 'inspection_date' => 'required',
+                'next_test_date' => 'required',
                 'status_level' => 'required',
                 'status' => 'required',
                 'inspection_file' => 'mimes:pdf',
@@ -86,6 +92,7 @@ class InspectionController extends Controller
                 'object_name.required' => 'Object yang di uji harus diisi!',
                 'object_location.required' => 'Lokasi object yang di uji harus diisi!',
                 'inspection_date.required' => 'Tanggal Inspeksi harus diisi!',
+                'next_test_date.required' => 'Tanggal Tes berikutnya harus diisi!',
                 'status_level.required' => 'Status harus diisi!',
                 'status.required' => 'Keterangan Status harus diisi!',
                 // 'inspection_file.required' => 'File harus diisi!',
@@ -116,6 +123,7 @@ class InspectionController extends Controller
                 'object_name' => $request->object_name,
                 'object_location' => $request->object_location,
                 'inspection_date' => $request->inspection_date,
+                'next_test_date' => $request->next_test_date,
                 'status_level' => $request->status_level,
                 'status' => $request->status,
                 'inspection_file' => $inspectionFile,
@@ -163,6 +171,7 @@ class InspectionController extends Controller
                 'object_name' => 'required',
                 'object_location' => 'required',
                 'inspection_date' => 'required',
+                'next_test_date' => 'required',
                 'status_level' => 'required',
                 'status' => 'required',
                 'inspection_file' => 'mimes:pdf',
@@ -172,14 +181,14 @@ class InspectionController extends Controller
                 'object_name.required' => 'Object yang di uji harus diisi!',
                 'object_location.required' => 'Lokasi object yang di uji harus diisi!',
                 'inspection_date.required' => 'Tanggal Inspeksi harus diisi!',
+                'next_test_date.required' => 'Tanggal Tes berikutnya harus diisi!',
                 'status_level.required' => 'Status harus diisi!',
                 'status.required' => 'Keterangan Status harus diisi!',
+                // 'inspection_file.required' => 'File harus diisi!',
                 'inspection_file.mimes' => 'File harus berupa PDF!',
        
             ]);
             $inspectionFile = '';
-
-           
 
             $user = User::where('id',$request->user_id)->first();
             $inspection = Inspection::where('id',$id)->first();
@@ -200,6 +209,7 @@ class InspectionController extends Controller
             $inspection->object_name = $request->object_name;
             $inspection->object_location = $request->object_location;
             $inspection->inspection_date = $request->inspection_date;
+            $inspection->next_test_date = $request->next_test_date;
             $inspection->status_level = $request->status_level;
             $inspection->status = $request->status;
             $inspection->inspection_file = $request->has('inspection_file') ? $inspectionFile : $inspection->inspection_file;
@@ -273,6 +283,10 @@ class InspectionController extends Controller
             $inspection->status_level = $request->status_level;
             $inspection->status = $request->status;
 
+            $user = User::where('id',$inspection->user_id)->first();
+
+            Mail::to($user->email)->send(new UpdateInspectionEmail($inspection,$user));
+
             $inspection->save();
 
             InspectionDetail::create([
@@ -289,5 +303,16 @@ class InspectionController extends Controller
             DB::rollback();
             throw $th;
         }
+    }
+
+    public function monitoring($id){
+        $inspection = Inspection::where('id',$id)->first();
+        if (!$inspection) {
+            return redirect()->route('admin.inspection.index');
+        }
+        $data['inspection'] = $inspection;
+        $data['users'] = User::all();
+        $data['details'] = InspectionDetail::where('inspection_id',$id)->get();
+        return view('admin.inspection.monitoring',$data);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
 use App\Models\Inspection;
 use Illuminate\Http\Request;
+use App\Models\InspectionDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,17 +47,28 @@ class InspectionController extends Controller
                     return ' <button type="button" class="btn btn-info btn-sm btn-print-qrcode-user" onclick="printQRCode(this)">Print</button>
                                         <div class="d-none"><iframe src="about:blank" class="iframe-qrcode"></iframe></div>';
                 })
-                ->rawColumns(['inspection_file', 'qrcode','print']) // Biarkan HTML di kolom tertentu
+                ->addColumn('action', function ($row) {
+                    return '
+                        <a href="' . route('user.inspection.monitoring', $row->id) . '" class="btn btn-info btn-sm">Monitoring</a>
+                    ';
+                })
+                ->rawColumns(['inspection_file', 'qrcode','print','action']) // Biarkan HTML di kolom tertentu
                 ->make(true);
         }
         return view('user.inspection.index');
     }
 
-    public function create(){
-        return view('user.inspection.create');
-    }
+    public function monitoring($id){
 
-    public function edit(){
-        return view('user.inspection.edit');
+        $userId = Auth::guard('web')->user()->id;
+        $inspection = Inspection::where('id',$id)->where('user_id',$userId)->first();
+        if (!$inspection) {
+            return redirect()->route('user.inspection.index');
+        }
+        $data['inspection'] = $inspection;
+        $data['users'] = User::all();
+        $data['details'] = InspectionDetail::where('inspection_id',$id)->get();
+        return view('user.inspection.monitoring',$data);
+
     }
 }

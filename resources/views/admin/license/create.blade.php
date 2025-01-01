@@ -50,10 +50,17 @@
                                 @endif
                             </div>    
                             <div class="form-group mb-3">
-                                <label for="objectName" class="form-label">Nama Lisensi</label>
-                                <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan nama lisensi" name="license_name" value="{{old('license_name')}}">
+                                <label for="objectName" class="form-label">Nama Personel</label>
+                                <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan nama personel" name="license_name" value="{{old('license_name')}}">
                                 @if($errors->has('license_name'))
                                     <div class="error text-danger">{{ $errors->first('license_name') }}</div>
+                                @endif  
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="objectName" class="form-label">Tanggal Lahir</label>
+                                <input class="form-control" type="date" id="objectName" required="" placeholder="Masukan tanggal lahir" name="birthdate" value="{{old('birthdate')}}">
+                                @if($errors->has('birthdate'))
+                                    <div class="error text-danger">{{ $errors->first('birthdate') }}</div>
                                 @endif  
                             </div>
                             <div class="form-group mb-3">

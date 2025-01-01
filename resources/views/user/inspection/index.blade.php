@@ -39,10 +39,12 @@
                                 <th scope="col" class="text-nowrap">Objek yang diuji</th>
                                 <th scope="col" class="text-nowrap">Lokasi objek yang diuji</th>
                                 <th scope="col" class="text-nowrap">Tanggal Inspeksi</th>
+                                <th scope="col" class="text-nowrap">Tanggal Tes Berikutnya</th>
                                 <th scope="col" class="text-nowrap">Dokumen</th>
                                 <th scope="col" class="text-nowrap">Status</th>
                                 <th scope="col" class="text-nowrap">Qrcode</th>
                                 <th scope="col" class="text-nowrap">Print Qrcode</th>
+                                <th scope="col" class="text-nowrap">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,10 +72,12 @@
                 { data: 'object_name', name: 'object_name' },
                 { data: 'object_location', name: 'object_location' },
                 { data: 'inspection_date', name: 'inspection_date' },
+                { data: 'next_test_date', name: 'next_test_date' },
                 { data: 'inspection_file', name: 'inspection_file', orderable: false, searchable: false },
                 { data: 'status', name: 'status' },
                 { data: 'qrcode', name: 'qrcode', orderable: false, searchable: false },
                 { data: 'print', name: 'print', searchable: false },
+                { data: 'action', name: 'action', searchable: false },
             ]
         });
     });

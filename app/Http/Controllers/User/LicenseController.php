@@ -9,6 +9,7 @@ use App\Models\License;
 use App\Mail\RenewEmail;
 use App\Models\RenewLicense;
 use Illuminate\Http\Request;
+use App\Models\LicenseDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,27 @@ class LicenseController extends Controller
                 ->addColumn('license_file', function ($row) {
                     return '<a href="' . asset('uploads/license_file/' . $row->license_file) . '" class="btn btn-success btn-sm" download>Download</a>';
                 })
-                ->rawColumns(['license_file']) // Biarkan kolom HTML
+                ->addColumn('action', function ($row) {
+                    return '
+                        <a href="' . route('user.license.monitoring', $row->id) . '" class="btn btn-info btn-sm">Monitoring</a>
+                    ';
+                })
+                ->rawColumns(['license_file','action']) // Biarkan kolom HTML
                 ->make(true);
         }
         return view('user.license.index');
+    }
+
+    public function monitoring($id){
+        $userId = Auth::guard('web')->user()->id;
+        $license = License::where('id', $id)->where('user_id',$userId)->first();
+        if(!$license){
+            return redirect()->route('user.license.index');
+        }
+        $data['users'] = User::all();
+        $data['key'] = Uuid::uuid4();
+        $data['license'] = $license;
+        $data['details'] = LicenseDetail::where('license_id', $id)->get();
+        return view('user.license.monitoring',$data);
     }
 }

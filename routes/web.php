@@ -20,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/scanner/{uuid}', [HomeController::class, 'scanner'])->name('scanner');
+Route::get('/result-scanner/{uuid}', [HomeController::class, 'resultScanner'])->name('resultScanner');
+Route::post('/input-scanner/{uuid}', [HomeController::class, 'inputScanner'])->name('inputScanner');
 Route::get('/tester', [HomeController::class, 'tester'])->name('tester');
 Route::get('/login', [AuthController::class, 'getLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('getLogin')->middleware('guest');

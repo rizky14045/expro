@@ -10,6 +10,7 @@ use App\Mail\RenewEmail;
 use App\Models\RenewLicense;
 use Illuminate\Http\Request;
 use App\Models\LicenseDetail;
+use App\Mail\UpdateLicenseEmail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -50,6 +51,7 @@ class LicenseController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $buttons = '
+                        <a href="' . route('admin.license.monitoring', $row->id) . '" class="btn btn-info btn-sm">Monitoring</a>
                         <a href="' . route('admin.license.edit', $row->id) . '" class="btn btn-primary btn-sm">Edit</a>
                         <a href="' . route('admin.license.renew', $row->id) . '" class="btn btn-warning btn-sm">Perpanjang</a>';
                     
@@ -96,6 +98,7 @@ class LicenseController extends Controller
                 'number_license' => 'required',
                 'user_id' => 'required',
                 'license_name' => 'required',
+                'birthdate' => 'required',
                 'personel_type' => 'required',
                 'service_sector' => 'required',
                 'tool_type' => 'required',
@@ -109,6 +112,7 @@ class LicenseController extends Controller
                 'number_license.required' => 'Nomor lisensi harus diisi!',
                 'user_id.required' => 'User harus diisi!',
                 'license_name.required' => 'Nama lisensi harus diisi!',
+                'birthdate.required' => 'Tanggal lahir harus diisi!',
                 'personel_type.required' => 'Jenis Personil harus diisi!',
                 'service_sector.required' => 'Bidang Jasa harus diisi!',
                 'tool_type.required' => 'Jenis Alat harus diisi!',
@@ -143,6 +147,7 @@ class LicenseController extends Controller
                 'number_license' => $request->number_license,
                 'user_id' => $request->user_id,
                 'license_name' => $request->license_name,
+                'birthdate' => $request->birthdate,
                 'expired_date' => $request->expired_date,
                 'personel_type' => $request->personel_type,
                 'service_sector' => $request->service_sector,
@@ -176,11 +181,14 @@ class LicenseController extends Controller
     public function update(Request $request,$id){
 
         try {
+
             DB::beginTransaction();
+
             $request->validate([
                 'number_license' => 'required',
                 'user_id' => 'required',
                 'license_name' => 'required',
+                'birthdate' => 'required',
                 'personel_type' => 'required',
                 'service_sector' => 'required',
                 'tool_type' => 'required',
@@ -194,6 +202,7 @@ class LicenseController extends Controller
                 'number_license.required' => 'Nomor lisensi harus diisi!',
                 'user_id.required' => 'User harus diisi!',
                 'license_name.required' => 'Nama lisensi harus diisi!',
+                'birthdate.required' => 'Tanggal lahir harus diisi!',
                 'personel_type.required' => 'Jenis Personil harus diisi!',
                 'service_sector.required' => 'Bidang Jasa harus diisi!',
                 'tool_type.required' => 'Jenis Alat harus diisi!',
@@ -224,6 +233,7 @@ class LicenseController extends Controller
             $license->number_license = $request->number_license;
             $license->user_id = $request->user_id;
             $license->license_name = $request->license_name;
+            $license->birthdate = $request->birthdate;
             $license->expired_date = $request->expired_date;
             $license->personel_type = $request->personel_type;
             $license->service_sector = $request->service_sector;
@@ -309,6 +319,10 @@ class LicenseController extends Controller
                 'status' => $request->status,
                 'status_level' => $request->status_level,
             ]);
+
+            $user = User::where('id',$license->user_id)->first();
+
+            Mail::to($user->email)->send(new UpdateLicenseEmail($license,$user));
             
             DB::commit();
             Alert::success('Update Berhasil', 'Lisensi berhasil diupdate!');
@@ -335,6 +349,18 @@ class LicenseController extends Controller
         Alert::success('Berhasil Terkirim', 'Pemberitahuan berhasil terkirim!');
         return redirect()->route('admin.license.index');
      
+    }
+
+    public function monitoring($id){
+        $license = License::where('id', $id)->first();
+        if(!$license){
+            return redirect()->route('admin.license.index');
+        }
+        $data['users'] = User::all();
+        $data['key'] = Uuid::uuid4();
+        $data['license'] = $license;
+        $data['details'] = LicenseDetail::where('license_id', $id)->get();
+        return view('admin.license.monitoring',$data);
     }
 
 }

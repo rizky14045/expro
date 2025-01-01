@@ -30,11 +30,13 @@ Route::prefix('user')->group(function () {
         Route::patch('/update-password', [ChangePasswordController::class, 'updatePassword'])->name('user.updatePassword');
         Route::prefix('license')->group(function () {
             Route::get('/', [LicenseController::class, 'index'])->name('user.license.index');
+            Route::get('/monitoring/{id}', [LicenseController::class, 'monitoring'])->name('user.license.monitoring');
             Route::get('/create', [LicenseController::class, 'create'])->name('user.license.create');
             Route::get('/edit', [LicenseController::class, 'edit'])->name('user.license.edit');
         });
         Route::prefix('inspection')->group(function () {
             Route::get('/', [InspectionController::class, 'index'])->name('user.inspection.index');
+            Route::get('/monitoring/{id}', [InspectionController::class, 'monitoring'])->name('user.inspection.monitoring');
             Route::get('/create', [InspectionController::class, 'create'])->name('user.inspection.create');
             Route::get('/edit', [InspectionController::class, 'edit'])->name('user.inspection.edit');
         });
