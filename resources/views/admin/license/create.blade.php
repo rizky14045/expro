@@ -57,6 +57,20 @@
                                 @endif  
                             </div>
                             <div class="form-group mb-3">
+                                <label for="objectName" class="form-label">NIK</label>
+                                <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan nik" name="nik" value="{{old('nik')}}">
+                                @if($errors->has('nik'))
+                                    <div class="error text-danger">{{ $errors->first('nik') }}</div>
+                                @endif  
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="objectName" class="form-label">Tempat Lahir</label>
+                                <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan tempat lahir" name="birth_place" value="{{old('birth_place')}}">
+                                @if($errors->has('birth_place'))
+                                    <div class="error text-danger">{{ $errors->first('birth_place') }}</div>
+                                @endif  
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="objectName" class="form-label">Tanggal Lahir</label>
                                 <input class="form-control" type="date" id="objectName" required="" placeholder="Masukan tanggal lahir" name="birthdate" value="{{old('birthdate')}}">
                                 @if($errors->has('birthdate'))
@@ -77,13 +91,6 @@
                                     <div class="error text-danger">{{ $errors->first('service_sector') }}</div>
                                 @endif  
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="objectName" class="form-label">Jenis Alat</label>
-                                <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan jenis alat" name="tool_type" value="{{old('tool_type')}}">
-                                @if($errors->has('tool_type'))
-                                    <div class="error text-danger">{{ $errors->first('tool_type') }}</div>
-                                @endif  
-                            </div>
                            
                         </div>
                         <div class="col-md-6">
@@ -95,14 +102,7 @@
                                 @endif  
                             </div>
                             <div class="form-group mb-3">
-                                <label for="objectName" class="form-label">Kelas</label>
-                                <input class="form-control" type="text" id="objectName" required="" placeholder="Masukan kelas" name="class" value="{{old('class')}}">
-                                @if($errors->has('class'))
-                                    <div class="error text-danger">{{ $errors->first('class') }}</div>
-                                @endif  
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="inputPDF" class="form-label">Tanggal Expired</label>
+                                <label for="inputPDF" class="form-label">Masa Berlaku</label>
                                 <input type="date" class="form-control" name="expired_date" value="{{old('expired_date')}}">
                                 @if($errors->has('expired_date'))
                                     <div class="error text-danger">{{ $errors->first('expired_date') }}</div>

@@ -83,6 +83,14 @@
                      <td class="text-nowrap text-capitalize"> : {{$license->license_name}}</td>
                </tr>
                <tr>
+                     <th class="pe-2 text-nowrap ">NIK</th> <!-- Adjust spacing with pe-* class -->
+                     <td class="text-nowrap text-capitalize"> : {{$license->nik}}</td>
+               </tr>
+               <tr>
+                     <th class="pe-2 text-nowrap ">Tempat Lahir</th> <!-- Adjust spacing with pe-* class -->
+                     <td class="text-nowrap text-capitalize"> : {{$license->birth_place}}</td>
+               </tr>
+               <tr>
                      <th class="pe-2 text-nowrap ">Tanggal Lahir</th> <!-- Adjust spacing with pe-* class -->
                      <td class="text-nowrap text-capitalize"> : {{$license->birthdate}}</td>
                </tr>
@@ -95,16 +103,8 @@
                      <td class="text-nowrap text-capitalize"> : {{$license->service_sector}}</td>
                </tr>
                <tr>
-                     <th class="pe-2 text-nowrap ">Jenis Alat</th> <!-- Adjust spacing with pe-* class -->
-                     <td class="text-nowrap text-capitalize"> : {{$license->tool_type}}</td>
-               </tr>
-               <tr>
                      <th class="pe-2 text-nowrap ">Klasifikasi</th> <!-- Adjust spacing with pe-* class -->
                      <td class="text-nowrap text-capitalize"> : {{$license->clasification}}</td>
-               </tr>
-               <tr>
-                     <th class="pe-2 text-nowrap ">Kelas</th> <!-- Adjust spacing with pe-* class -->
-                     <td class="text-nowrap text-capitalize"> : {{$license->class}}</td>
                </tr>
             </table>
         </div>

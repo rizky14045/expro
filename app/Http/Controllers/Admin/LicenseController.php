@@ -94,16 +94,17 @@ class LicenseController extends Controller
         try {
 
             DB::beginTransaction();
+
             $request->validate([
                 'number_license' => 'required',
                 'user_id' => 'required',
                 'license_name' => 'required',
+                'nik' => 'required',
+                'birth_place' => 'required',
                 'birthdate' => 'required',
                 'personel_type' => 'required',
                 'service_sector' => 'required',
-                'tool_type' => 'required',
                 'clasification' => 'required',
-                'class' => 'required',
                 'expired_date' => 'required',
                 'status' => 'required',
                 'status_level' => 'required',
@@ -112,15 +113,15 @@ class LicenseController extends Controller
                 'number_license.required' => 'Nomor lisensi harus diisi!',
                 'user_id.required' => 'User harus diisi!',
                 'license_name.required' => 'Nama lisensi harus diisi!',
+                'nik.required' => 'NIK harus diisi!',
+                'birth_place.required' => 'Tempat lahir harus diisi!',
                 'birthdate.required' => 'Tanggal lahir harus diisi!',
                 'personel_type.required' => 'Jenis Personil harus diisi!',
                 'service_sector.required' => 'Bidang Jasa harus diisi!',
-                'tool_type.required' => 'Jenis Alat harus diisi!',
                 'clasification.required' => 'Klasifikasi harus diisi!',
-                'class.required' => 'Kelas harus diisi!',
                 'status.required' => 'Status harus diisi!',
                 'status_level.required' => 'Keterangan status harus diisi!',
-                'expired_date.required' => 'Tanggal expired harus diisi!',
+                'expired_date.required' => 'Masa berlaku harus diisi!',
                 'license_file.mimes' => 'File harus berupa PDF!',
        
             ]);
@@ -147,13 +148,13 @@ class LicenseController extends Controller
                 'number_license' => $request->number_license,
                 'user_id' => $request->user_id,
                 'license_name' => $request->license_name,
+                'nik' => $request->nik,
+                'birth_place' => $request->birth_place,
                 'birthdate' => $request->birthdate,
                 'expired_date' => $request->expired_date,
                 'personel_type' => $request->personel_type,
                 'service_sector' => $request->service_sector,
-                'tool_type' => $request->tool_type,
                 'clasification' => $request->clasification,
-                'class' => $request->class,
                 'expired_date' => $request->expired_date,
                 'status' => $request->status,
                 'status_level' => $request->status_level,
@@ -188,12 +189,12 @@ class LicenseController extends Controller
                 'number_license' => 'required',
                 'user_id' => 'required',
                 'license_name' => 'required',
+                'nik' => 'required',
+                'birth_place' => 'required',
                 'birthdate' => 'required',
                 'personel_type' => 'required',
                 'service_sector' => 'required',
-                'tool_type' => 'required',
                 'clasification' => 'required',
-                'class' => 'required',
                 'expired_date' => 'required',
                 'status' => 'required',
                 'status_level' => 'required',
@@ -202,15 +203,15 @@ class LicenseController extends Controller
                 'number_license.required' => 'Nomor lisensi harus diisi!',
                 'user_id.required' => 'User harus diisi!',
                 'license_name.required' => 'Nama lisensi harus diisi!',
+                'nik.required' => 'NIK harus diisi!',
+                'birth_place.required' => 'Tempat lahir harus diisi!',
                 'birthdate.required' => 'Tanggal lahir harus diisi!',
                 'personel_type.required' => 'Jenis Personil harus diisi!',
                 'service_sector.required' => 'Bidang Jasa harus diisi!',
-                'tool_type.required' => 'Jenis Alat harus diisi!',
                 'clasification.required' => 'Klasifikasi harus diisi!',
-                'class.required' => 'Kelas harus diisi!',
                 'status.required' => 'Status harus diisi!',
                 'status_level.required' => 'Keterangan status harus diisi!',
-                'expired_date.required' => 'Tanggal expired harus diisi!',
+                'expired_date.required' => 'Masa berlaku harus diisi!',
                 'license_file.mimes' => 'File harus berupa PDF!',
        
             ]);
@@ -233,13 +234,13 @@ class LicenseController extends Controller
             $license->number_license = $request->number_license;
             $license->user_id = $request->user_id;
             $license->license_name = $request->license_name;
+            $license->nik = $request->nik;
+            $license->birth_place = $request->birth_place;
             $license->birthdate = $request->birthdate;
             $license->expired_date = $request->expired_date;
             $license->personel_type = $request->personel_type;
             $license->service_sector = $request->service_sector;
-            $license->tool_type = $request->tool_type;
             $license->clasification = $request->clasification;
-            $license->class = $request->class;
             $license->expired_date = $request->expired_date;
             $license->status = $request->status;
             $license->status_level = $request->status_level;
