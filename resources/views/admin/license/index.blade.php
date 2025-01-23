@@ -27,7 +27,7 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="d-flex justify-content-between align-items-center px-5 pt-3">
+            <div class="d-flex justify-content-between align-items-center px-3 pt-3">
                 <form action="" method="GET">
                     <div class="d-flex align-items-center gap-3">
 
