@@ -27,9 +27,25 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="d-flex justify-content-end pe-3 pt-3">
+            <div class="d-flex justify-content-between align-items-center px-5 pt-3">
+                <form action="" method="GET">
+                    <div class="d-flex align-items-center gap-3">
+
+                        <div class="mb-3">
+                            <p>Pilih User</p>
+                            <select class="form-input select-2 form-control" id="example-select" name="user_id">
+                                <option value="">Pilih User</option>
+                                @foreach ($users as $user)
+                                <option value="{{$user->id}}" {{request('user_id') == $user->id ? 'selected' : ''}}>{{$user->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-info d-inline mt-3">Cari</button>
+                    </div>
+                </form>
                 <a href="{{route('admin.license.create')}}" class="btn btn-success">Tambah Data</a>
             </div>
+            
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mb-0 w-100" id="licenses-table">
@@ -65,10 +81,30 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            var user_id = '{{$request->user_id ?? null}}'
             $('#licenses-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.license.index') }}", // Route ke controller
+                ajax: function (data, callback, settings) {
+                    // Ambil nilai user_id dari select
+                    var userId = $('#example-select').val();
+                    var url = "{{ route('admin.license.index') }}";
+
+                    // Tambahkan parameter user_id ke URL jika ada
+                    if (userId) {
+                        url += '?user_id=' + userId;
+                    }
+
+                    // Lakukan request ke server
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: data,
+                        success: function (response) {
+                            callback(response); // Kirim data ke DataTables
+                        }
+                    });
+                },
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'number_license', name: 'number_license' },

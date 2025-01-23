@@ -19,8 +19,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 class LicenseController extends Controller
 {
     public function index(Request $request){
+
+        $data['users'] = User::get();
         if ($request->ajax()) {
-            $query = License::with('user')->select('licenses.*')->latest();
+            $query = License::query();
+            $query->with('user')->select('licenses.*')->when($request->user_id, function ($item) use ($request) {
+                $item->where('licenses.user_id', $request->user_id);
+            })->latest();
         
             return datatables()->of($query)
                 ->addIndexColumn() // Tambahkan nomor urut
@@ -81,7 +86,8 @@ class LicenseController extends Controller
                 ->rawColumns(['license_file', 'action']) // Biarkan kolom HTML
                 ->make(true);
         }
-        return view('admin.license.index');
+        
+        return view('admin.license.index',$data);
     }
 
     public function create(){
