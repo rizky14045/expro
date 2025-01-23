@@ -268,7 +268,9 @@ class LicenseController extends Controller
                 return redirect()->route('admin.license.index');
             }
 
-            unlink(public_path('uploads/license_file/'.$license->license_file));
+            if($license->license_file){
+                unlink(public_path('uploads/license_file/'.$license->license_file));
+            }
             $license->delete();
 
             DB::commit();
