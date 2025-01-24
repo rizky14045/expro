@@ -36,6 +36,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-nowrap">No</th>
+                                <th scope="col" class="text-nowrap">Status</th>
                                 <th scope="col" class="text-nowrap">NPWP</th>
                                 <th scope="col" class="text-nowrap">Nama</th>
                                 <th scope="col" class="text-nowrap">Alamat</th>
@@ -81,6 +82,7 @@
             ajax: "{{ route('admin.user.index') }}", // Route ke method index
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'status', name: 'status' },
                 { data: 'number', name: 'number' },
                 { data: 'name', name: 'name' },
                 { data: 'address', name: 'address' },

@@ -26,7 +26,15 @@ class UserController extends Controller
                             <button type="button" class="btn btn-danger btn-sm" onclick="deleteItem(this)">Hapus</button>
                         </form>';
                 })
-                ->rawColumns(['action']) // Biarkan kolom 'action' memproses HTML
+                ->addColumn('status', function ($row) {
+                    if ($row->is_actived == true) {
+                        return 'Aktif';
+                    }else{
+                        return 'Tidak Aktif';
+                    }
+                    
+                })
+                ->rawColumns(['action','status']) // Biarkan kolom 'action' memproses HTML
                 ->make(true);
         }
 
@@ -103,6 +111,7 @@ class UserController extends Controller
             $user->address = $request->address;
             $user->email = $request->email;
             $user->phone_number = $request->phone_number;
+            $user->is_actived = $request->is_actived;
             $user->password = $request->password ?  bcrypt($request->password) : $user->password;
             $user->save();
 

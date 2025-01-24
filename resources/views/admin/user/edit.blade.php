@@ -46,6 +46,17 @@
                         <label class="form-label" for="email-id">Nomor Handphone</label>
                         <input type="text" required class="form-control mb-0" id="text-id" placeholder="Masukan NomorHandphone" name="phone_number" required value="{{$user->phone_number}}">
                     </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="example-select" class="form-label">Status</label>
+                        <select class="form-select" id="example-select" name="is_actived">
+                            <option value="">Pilih Status</option>
+                            <option value="0" {{ $user->is_actived == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                            <option value="1" {{ $user->is_actived == 1 ? 'selected' : '' }}>Aktif</option>
+                        </select>
+                        @if($errors->has('is_actived'))
+                            <div class="error text-danger">{{ $errors->first('is_actived') }}</div>
+                        @endif
+                    </div> 
                     <div class="form-group pb-3 col-md-6">
                         <label class="form-label" for="email-id">Password</label>
                         <input type="password" class="form-control mb-0" id="email-id" name="password">

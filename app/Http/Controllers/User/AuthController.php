@@ -33,6 +33,11 @@ class AuthController extends Controller
             return redirect()->route('login');
         }
 
+        if($user->is_actived == false){
+            Alert::error('Login gagal','Akun sudah tidak aktif');
+            return redirect()->route('login');
+        }
+
         if( Hash::check($request->password,$user->password) ){
             $remember = $request->has('remember') ? 1 : 0;
             Auth::guard('web')->login($user,$remember);
