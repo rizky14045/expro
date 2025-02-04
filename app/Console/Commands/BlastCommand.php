@@ -43,7 +43,7 @@ class BlastCommand extends Command
     public function handle()
     {
         $tanggalSekarang = Carbon::now();
-        $tanggalMendekati = $tanggalSekarang->copy()->addDays(31);
+        $tanggalMendekati = $tanggalSekarang->copy()->addDays(60);
         $tanggalTerlewat = $tanggalSekarang->copy()->subDays(365);
         
         $licenses = License::where(function ($query) use ($tanggalSekarang, $tanggalMendekati, $tanggalTerlewat) {
