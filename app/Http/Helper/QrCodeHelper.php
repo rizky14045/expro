@@ -10,12 +10,13 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class QrCodeHelper
 {
-    public static function generateImage($inspection,$user)
+    public function generateImage($inspection,$user)
     {
         $qrCode = QrCode::format('png')->size(350)->generate(route('scanner',['uuid' => $inspection->uuid]));
 
         // Save QR code as a temporary file to avoid binary issues
         $tempPath = public_path($inspection->id.'temp-qr-code.png');
+        $fontPath = public_path('fonts/Roboto-Bold.ttf');
         file_put_contents($tempPath, $qrCode);
         
         if (!file_exists($tempPath)) {
@@ -34,52 +35,31 @@ class QrCodeHelper
 
         // 4. Tambahkan teks (seperti di contoh)
 
-        $canvas->text('#Expro Jaya Mandiri', 420, 115, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf')); // Pastikan font file ada
-            $font->size(64);
-            $font->color('#000000');
-        });
+        // Title text
+        $this->drawText($canvas, '#Expro Jaya Mandiri', 420, 115, $fontPath, 64);
+        $this->drawText($canvas, $user->name, 465, 170, $fontPath, 32);
 
-        $canvas->text($user->name, 465, 170, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
-        $canvas->text($user->address, 465, 220, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
+        // Wrapped address text
+        $addressText = $user->address;
+        $y = $this->drawWrappedText($canvas, $addressText, 465, 220, $fontPath, 32, 1600, 40);
 
-        $canvas->text('-------------------------------------------------------------------------------', 465, 280, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
+        // Divider
+        $y += 20;
+        $this->drawText($canvas, '-------------------------------------------------------------------------------', 465, $y, $fontPath, 32);
 
-        $canvas->text('Type :'.$inspection->object_name, 465, 365, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
+        // Type text (wrapped)
+        $y += 60;
+        $testY = $y;
+        $typeText = 'Type : '.$inspection->object_name;
+        $y = $this->drawWrappedText($canvas, $typeText, 465, $y, $fontPath, 32, 800, 40);
+       
+        // Area text — POSISI DINAMIS SESUDAH TYPE
+        $y = $this->drawText($canvas, $inspection->object_location, 465, $y, $fontPath, 32, true); // true = return new y
 
-        $canvas->text($inspection->object_location, 465, 415, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
-
-        $canvas->text('Test Due : '.$testDate, 1050, 365, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
-
-        $canvas->text('Next Test Due : '.$nextDate, 1050, 415, function ($font) {
-            $font->file(public_path('fonts/Roboto-Bold.ttf'));
-            $font->size(32);
-            $font->color('#000000');
-        });
+        // Teks kanan (posisi tetap)
+        $this->drawText($canvas, 'Test Due : '.$testDate, 1050, $testY, $fontPath, 32);
+        $nextDueY = $testY + 40;
+        $this->drawText($canvas, 'Next Test Due : '.$nextDate, 1050, $nextDueY, $fontPath, 32);
 
         unlink($tempPath);
         // 6. Simpan atau tampilkan gambar
@@ -88,5 +68,56 @@ class QrCodeHelper
         $canvas->save($outputPath);
 
         return $imageName;
+    }
+
+
+    private function drawText($canvas, $text, $x, $y, $fontPath, $fontSize, $returnNewY = false)
+    {
+        $canvas->text($text, $x, $y, function ($font) use ($fontPath, $fontSize) {
+            $font->file($fontPath);
+            $font->size($fontSize);
+            $font->color('#000000');
+        });
+
+        // Kembalikan posisi Y berikutnya jika diminta
+        return $returnNewY ? $y + $fontSize + 10 : null;
+    }
+
+    private function drawWrappedText($canvas, $text, $x, $y, $fontPath, $fontSize, $maxWidth, $lineSpacing)
+    {
+        $lines = $this->wrapText($text, $fontPath, $fontSize, $maxWidth);
+
+        foreach ($lines as $line) {
+            $this->drawText($canvas, $line, $x, $y, $fontPath, $fontSize);
+            $y += $lineSpacing;
+        }
+
+        return $y;
+    }
+
+    private function wrapText($text, $fontPath, $fontSize, $maxWidth)
+    {
+        $words = explode(' ', $text);
+        $lines = [];
+        $currentLine = '';
+
+        foreach ($words as $word) {
+            $testLine = $currentLine ? $currentLine . ' ' . $word : $word;
+            $box = imagettfbbox($fontSize, 0, $fontPath, $testLine);
+            $lineWidth = abs($box[2] - $box[0]);
+
+            if ($lineWidth > $maxWidth && $currentLine !== '') {
+                $lines[] = $currentLine;
+                $currentLine = $word;
+            } else {
+                $currentLine = $testLine;
+            }
+        }
+
+        if ($currentLine !== '') {
+            $lines[] = $currentLine;
+        }
+
+        return $lines;
     }
 }

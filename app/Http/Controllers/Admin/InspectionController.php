@@ -137,7 +137,8 @@ class InspectionController extends Controller
             ]);
 
             $user = User::where('id',$request->user_id)->first();
-            $qrcode = QrCodeHelper::generateImage($inspection,$user);
+            $qrHelper = new QrCodeHelper();
+            $qrcode = $qrHelper->generateImage($inspection,$user);
 
             $inspection->qrcode = $qrcode;
             $inspection->save();
@@ -215,7 +216,9 @@ class InspectionController extends Controller
             $inspection->inspection_file = $request->has('inspection_file') ? $inspectionFile : $inspection->inspection_file;
             $inspection->note = $request->note;
 
-            $qrcode = QrCodeHelper::generateImage($inspection,$user);
+
+            $qrHelper = new QrCodeHelper();
+            $qrcode = $qrHelper->generateImage($inspection,$user);
             unlink(public_path('qrcode/'.$inspection->qrcode));
 
             $inspection->qrcode = $qrcode;
