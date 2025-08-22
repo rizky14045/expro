@@ -36,25 +36,27 @@ class QrCodeHelper
         // 4. Tambahkan teks (seperti di contoh)
 
         // Title text
-        $this->drawText($canvas, '#Expro Jaya Mandiri', 420, 115, $fontPath, 64);
-        $this->drawText($canvas, $user->name, 465, 170, $fontPath, 32);
+        $this->drawText($canvas, 'INSPECTION', 420, 115, $fontPath, 52);
+        $this->drawText($canvas, 'PT Expro Jaya Mandiri', 420, 165, $fontPath, 52);
+        $this->drawText($canvas, $user->name, 450, 225, $fontPath, 32);
+
 
         // Wrapped address text
         $addressText = $user->address;
-        $y = $this->drawWrappedText($canvas, $addressText, 465, 220, $fontPath, 32, 1600, 40);
+        $y = $this->drawWrappedText($canvas, $addressText, 450, 265, $fontPath, 32, 1500, 40);
 
         // Divider
         $y += 20;
-        $this->drawText($canvas, '-------------------------------------------------------------------------------', 465, $y, $fontPath, 32);
+        $this->drawText($canvas, '-------------------------------------------------------------------------------', 450, $y, $fontPath, 32);
 
         // Type text (wrapped)
-        $y += 60;
+        $y += 40;
         $testY = $y;
         $typeText = 'Type : '.$inspection->object_name;
-        $y = $this->drawWrappedText($canvas, $typeText, 465, $y, $fontPath, 32, 800, 40);
+        $y = $this->drawWrappedText($canvas, $typeText, 450, $y, $fontPath, 32, 800, 40);
        
         // Area text — POSISI DINAMIS SESUDAH TYPE
-        $y = $this->drawText($canvas, $inspection->object_location, 465, $y, $fontPath, 32, true); // true = return new y
+        $y = $this->drawText($canvas, $inspection->object_location, 450, $y, $fontPath, 32, true); // true = return new y
 
         // Teks kanan (posisi tetap)
         $this->drawText($canvas, 'Test Due : '.$testDate, 1050, $testY, $fontPath, 32);
